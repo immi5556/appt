@@ -1,0 +1,10 @@
+html, body {
+	width: 99%;
+	height: 98%;
+}
+
+.middler{
+	text-align: center;
+	vertical-align: middle;
+	min-height: 80%;
+}

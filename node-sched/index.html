@@ -1,0 +1,109 @@
+<html>
+<head>
+	<script src="/static/js/jquery-1.10.2.min.js" type="text/javascript" language="javascript"></script>
+	<script src="/static/js/jquery-ui.min.js" type="text/javascript" language="javascript"></script>
+	<script src="/static/js/jq.schedule.js" type="text/javascript" language="javascript"></script>
+	<link rel="stylesheet" type="text/css" href="/static/css/style.css" />
+</head>
+<body>
+<div>
+
+</div>
+	<div id="schedule"></div>
+	<script type="text/javascript">
+		jQuery(document).ready(function(){
+
+var schData ={
+		            'Name' : {
+		                title : 'Title Area',
+		                schedule:[
+		                    {
+		                        start:'09:00',
+		                        end:'12:00',
+		                        text:'Text Area',
+		                        data:{
+		                        }
+		                    },
+		                    {
+		                        start:'11:00',
+		                        end:'14:00',
+		                        text:'Text Area',
+		                        data:{
+		                        }
+		                    },
+							{
+		                        start:'11:00',
+		                        end:'14:00',
+		                        text:'Text Area',
+		                        data:{
+		                        }
+		                    },
+		                    {
+		                        start:'14:00',
+		                        end:'15:00',
+		                        text:'Text Area',
+		                        data:{
+		                        }
+		                    }		                    
+		                ]
+		            },
+		            'Age' : {
+		                title : 'Title Area',
+		                schedule:[
+		                    {
+		                        start:'16:00',
+		                        end:'17:00',
+		                        text:'Text Area',
+		                        data:{
+		                        }
+		                    }
+		                ]
+		            }
+		        };
+
+
+var optdata = {
+		        startTime: "07:00", // schedule start time(HH:ii)
+		        endTime: "21:00",   // schedule end time(HH:ii)
+		        widthTime:60 * 10,  // cell timestamp example 10 minutes
+		        timeLineY:60,       // height(px)
+		        verticalScrollbar:20,   // scrollbar (px)
+		        timeLineBorder:2,   // border(top and bottom)
+		        debug:"#debug",     // debug string output elements
+		        rows : schData,
+		        change: function(node,data){
+		            console.log("change event");
+		        },
+		        init_data: function(node,data){
+		        	console.log('init_data');
+		        },
+		        click: function(node,data){
+		            console.log("click event");
+		        },
+		        append: function(node,data){
+		        },
+		        time_click: function(time,data){
+		            console.log("time click event");
+		        },
+		    };
+
+		    var $sc = jQuery("#schedule").timeSchedule(optdata);
+
+			var bdata = {
+                start:'12:00',
+                end:'13:00',
+                text:'Newly Added',
+                data:{
+                }		                    
+			};
+
+			$(document).on("LordJesus", function(){
+				schData.Name.schedule.push(bdata);
+				$sc = jQuery("#schedule").timeSchedule(optdata);
+			});
+			
+
+		});
+	</script>
+</body>
+</html>

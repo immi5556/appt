@@ -1,0 +1,8 @@
+{
+	"genomeSchema": {
+			"genomeId": { "type": "Number" },
+			"name": {"type": "String"}
+		},
+
+    "city": {"type": "ObjectId", "ref": "genomeSchema"}
+}

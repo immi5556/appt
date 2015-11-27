@@ -1,0 +1,24 @@
+html
+  head
+    include ./../includes/head.jade
+  body
+    div(style='display:none')
+      span(id='emailstore')=val[0].regis.email
+      span(id='_idstore')=val[0]._id
+    div(class="section group")
+      h2!= 'Registration Page'
+      table
+        th(style='display:none')
+        th= 'Name'
+        th='Email'
+        th='Status'
+        th='Created'
+        each vl, idx in val
+          tr
+            td(style='display:none')=vl._id
+            td=vl.regis.name
+            td=vl.regis.email
+            td=vl.action
+            td=moment(vl.createdat).format('YYYY-MM-DD HH:mm:ss')
+    include ./../static/registration.html
+    include ./../includes/foot.jade

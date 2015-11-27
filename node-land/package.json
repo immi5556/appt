@@ -1,0 +1,18 @@
+{
+  "name": "ext-api",
+  "version": "0.0.1",
+  "dependencies": {
+    "body-parser": "^1.14.1",
+    "connect": "^3.4.0",
+    "express-session": "^1.12.1",
+    "generate-schema": "^2.1.1",
+    "jade": "^1.11.0",
+    "moment": "^2.10.6",
+    "mongodb": "^2.0.49",
+    "mongoose": "^4.2.7",
+    "node-uuid": "^1.4.7",
+    "nodemailer": "^1.10.0",
+    "nodemailer-smtp-transport": "^1.0.4",
+    "request-ip": "^1.1.4"
+  }
+}

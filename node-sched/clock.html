@@ -1,0 +1,58 @@
+﻿<html>
+<head>
+    <title>Day Calendar</title>
+    <script src="static/js/d3.min.js"></script>
+    <script src="static/js/colorsbrew.js"></script>
+    <script src="static/js/a7-clock.js"></script>
+</head>
+<body>
+    <div id="clock"></div>
+    <div id="clock">Lord Jesus Help establish this library</div>
+</body>
+<script>
+    var options = ['haircut', 'shaving', 'facial', 'massage', 'nail clean', 'some 1', 'some 2', 'some 3', 'some 4', 'SOme 5', 'Some 6', 'some 7'];
+    var lst = [
+            {
+                'name': 'Shaving',
+                'appointments': [
+                    { 'start': '07:15', 'end': '08:00', 'title': 'Shaving', 'class': 'shaving', 'payload': { myId: 1 } },
+                    { 'start': '09:50', 'end': '11:10', 'title': 'Shave', 'class': 'shaving', 'overlap': true, 'payload': { myId: 2 } }
+                ]
+            },
+            {
+                'name': 'Massage',
+                'appointments': [
+                    { 'start': '09:00', 'end': '11:00', 'title': 'Massage Face', 'class': 'haircut', 'payload': { myId: 1 } },
+                    { 'start': '13:30', 'end': '14:15', 'title': 'btn massage', 'class': 'haircut' },
+                    { 'start': '14:30', 'end': '16:30', 'title': 'jjj massage', 'class': 'haircut' }
+                ]
+            },
+            {
+                'name': 'Facial',
+                'appointments': [
+                    { 'start': '10:00', 'end': '12:30', 'title': 'gold pack', 'class': 'facial' },
+                    { 'start': '16:00', 'end': '18:30', 'title': 'silver pack', 'class': 'facial' }
+                ]
+            },
+            {
+                'name': 'Nail Cleaning',
+                'appointments': [
+                    { 'start': '13:00', 'end': '14:30', 'title': 'clean nail', 'class': 'facial' },
+                    { 'start': '16:00', 'end': '18:30', 'title': 'clean nail 2', 'class': 'facial' }
+                ]
+            },
+            {
+                'name': 'Nail Cleaning',
+                'appointments': [
+                    { 'start': '07:00', 'end': '14:30', 'title': 'clean nail', 'class': 'facial' },
+                    { 'start': '15:00', 'end': '18:30', 'title': 'clean nail 2', 'class': 'facial' }
+                ]
+            }
+    ];
+    a7("#clock").scheduler({
+        variety: options,
+        headerlabel: 'Scheduler',
+        tasks: lst
+    });
+</script>
+</html>

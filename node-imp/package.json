@@ -1,0 +1,11 @@
+{
+  "name": "ext-api",
+  "version": "0.0.1",
+  "dependencies": {
+    "body-parser": "^1.14.1",
+    "generate-schema": "^2.1.1",
+    "jade": "^1.11.0",
+    "mongoose": "^4.2.7",
+    "request-ip": "^1.1.4"
+  }
+}
