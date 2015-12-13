@@ -2,23 +2,147 @@ html
   head
     include ./../includes/head.jade
   body
-    div(style='display:none')
-      span(id='emailstore')=val[0].regis.email
-      span(id='_idstore')=val[0]._id
-    div(class="section group")
-      h2!= 'Registration Page'
-      table
-        th(style='display:none')
-        th= 'Name'
-        th='Email'
-        th='Status'
-        th='Created'
-        each vl, idx in val
+    //form(action="/upload/"+val.landing.uniqueid method="post" enctype="multipart/form-data" id="frm-ss")
+    div
+      div(class="section group")
+        h2!= 'Registration Page'
+        div(style='display:none')
+          input(type='hidden' id='emailstore' name='emailstore' value=val.landing.regis.email)
+          input(type='hidden' id='_idstore' name='_oid' value=val.landing._id)
+        table
+          th(style='display:none')
+          th= 'Name'
+          th='Email'
+          th='Status'
+          th='Created'
           tr
-            td(style='display:none')=vl._id
-            td=vl.regis.name
-            td=vl.regis.email
-            td=vl.action
-            td=moment(vl.createdat).format('YYYY-MM-DD HH:mm:ss')
-    include ./../static/registration.html
+            td(style='display:none')=val.landing._id
+            td=val.landing.regis.name
+            td=val.landing.regis.email
+            td=val.landing.action
+            td=moment(val.landing.createdat).format('YYYY-MM-DD HH:mm:ss')
+      div
+        p
+          h3='Website Display Configuration'
+          table
+            tr
+              td='Company Name:'
+              td
+                input(type="text" id="wsClientName" name="wsClientName" value=val.client.wsClientName)
+            tr
+              td='Subdomain:'
+              td
+                input(type="text" id="sdomain" name="sdomain" value=val.client.sdomain)
+            tr
+              td='Logo:'
+              td
+                input(id="logoupload" type="file" name="files[]" data-url="/upload")
+                //input(type='hidden' id='logoupload-hide' name='logoupload-hide' value=val.website.logo)
+            tr(style=val.client.logopic ? 'block' : 'none')
+              td
+              td
+                img(style="width:100px;height:60px;" src='/' + val.client.logopic)
+            tr
+              td='Logo Url:'
+              td
+                input(type="text" id="logourl" name="logourl" value=val.client.logourl)
+            tr(style="display:none")
+              td='Select Icon:'
+              td
+                input(type="file" id="selIcon" name="selIcon")
+      div
+        p
+          h3='Company Details'
+          table
+            tr
+              td='Full Name:'
+              td
+                input(type="text" id="ClientName" name="ClientName" value=val.client.ClientName)
+            tr
+              td='Business Type:'
+              td
+                select(id="bstType" name="bstType")
+                  option(value="hospital")='Hospital'
+                  option(value="training")='Training'
+                  option(value="lawfirm")='Law Firm'
+                  option(value="doctors")='Doctors'
+                  option(value="other")='Other'
+                br
+                input(type="text" id="busTypeOther" name="busTypeOther" style="display:none;" value=val.client.busTypeOther)
+            tr
+              td='Phone:' 
+              td
+                input(type="text" id="phoneName" name="phoneName" value=val.client.phoneName)
+            tr
+              td='Email:'
+              td
+                input(type="text" id="email" name="email" value=val.client.email)
+            tr
+              td='Business Detail:'
+              td
+                textarea(id="bdet" name="bdet" value=val.client.bdet)
+      div
+        p
+          h3='Appointment Configuration'
+          table
+            tr
+              td='Concurrent Count:'
+              td
+                input(type="text" id="concCount" name="concCount" value=val.client.concCount)
+            tr
+              td='Working Hour Start:'
+              td
+                input(type="text" id="wrkHrsStart" name="wrkHrsStart" value=val.client.wrkHrsStart)
+            tr
+              td='Working Hour End:' 
+              td
+                input(type="text" id="wrkHrsEnd" name="wrkHrsEnd" value=val.client.wrkHrsEnd)
+            tr
+              td='Perday Capacity:'
+              td
+                input(type="text" id="perdayCap" name="perdayCap" value=val.client.perdayCap)
+            tr
+              td='Overlap:'
+              td
+                input(type="checkbox" id="wrkHrsOverlap" name="wrkHrsOverlap" value=val.client.wrkHrsOverlap)
+            tr
+              td='Allow Custom:'
+              td
+                input(type="checkbox" id="allowCustom" name="allowCustom" value=val.client.allowCustom)
+            tr
+              td='Auto Acknowledge:'
+              td
+                input(type="checkbox" id="autoAcknowledge" name="autoAcknowledge" value=val.client.autoAcknowledge)
+            tr
+              td='Preconfigured:'
+              td
+                div(style="float:left")
+                  a(href="javascript:void(0)" id="add-spltyy")='Add Speciality'
+            each vl, idx in (val.client ? val.client.speciality : [])
+              tr
+                td
+                td
+                  div.splty
+                    div.add-splity
+                      input(class="spl-name" name="splname-" + vl.suffix value=vl.Name)
+                      input(class="spl-mins" name="splmins-" + vl.suffix value=vl.mins style="width:40px;")
+                      input(type="file" class="spl-icon" name="files[]" data-url="/upload" value=vl.icon style="width:30px;")
+                      input(type="hidden" class="spl-icon-hide" value=vl.icon)
+                      img(src=vl.icon)
+                      a(class="del-splt" href="javascript:void(0)")='Del Speciality'
+                      br
+                      div(style="float:left")
+                        a(class="add-rsrc" href="javascript:void(0);" data-res-append=vl.suffix)='Add Resource'
+                      each vl1, idx1 in vl.list
+                        div(class="add-resource")
+                          div(style="float:left")
+                            input(class="res-name" name="resname-"+ vl.suffix value=vl1.Name)
+                            input(class="res-mins" name="resmins-" value=vl1.mins style="width:40px;")
+                            input(type="file" class="res-icon" name="files[]" data-url="/upload" value=vl.icon style="width:30px;")
+                            input(type="hidden" class="res-icon-hide" value=vl.icon)
+                          a(class="del-rsrc" href="javascript:void(0)")='Del Resource'
+
+
+      input(id="sveWs" type="submit" value="submit")  
+    
     include ./../includes/foot.jade

@@ -12,6 +12,6 @@ module.exports = function(app, daler, localSession, logger){
   		localSession.city = geo.city || 'Nil';
   		daler.logTrace(geo);
   	}
-    res.render('index', daler.landing);
+    res.sendfile("views/static/_index.html")
   });
 }

@@ -1,109 +1,160 @@
+<!DOCTYPE html>
 <html>
-<head>
-	<script src="/static/js/jquery-1.10.2.min.js" type="text/javascript" language="javascript"></script>
-	<script src="/static/js/jquery-ui.min.js" type="text/javascript" language="javascript"></script>
-	<script src="/static/js/jq.schedule.js" type="text/javascript" language="javascript"></script>
-	<link rel="stylesheet" type="text/css" href="/static/css/style.css" />
-</head>
-<body>
-<div>
-
-</div>
-	<div id="schedule"></div>
-	<script type="text/javascript">
-		jQuery(document).ready(function(){
-
-var schData ={
-		            'Name' : {
-		                title : 'Title Area',
-		                schedule:[
-		                    {
-		                        start:'09:00',
-		                        end:'12:00',
-		                        text:'Text Area',
-		                        data:{
-		                        }
-		                    },
-		                    {
-		                        start:'11:00',
-		                        end:'14:00',
-		                        text:'Text Area',
-		                        data:{
-		                        }
-		                    },
-							{
-		                        start:'11:00',
-		                        end:'14:00',
-		                        text:'Text Area',
-		                        data:{
-		                        }
-		                    },
-		                    {
-		                        start:'14:00',
-		                        end:'15:00',
-		                        text:'Text Area',
-		                        data:{
-		                        }
-		                    }		                    
-		                ]
-		            },
-		            'Age' : {
-		                title : 'Title Area',
-		                schedule:[
-		                    {
-		                        start:'16:00',
-		                        end:'17:00',
-		                        text:'Text Area',
-		                        data:{
-		                        }
-		                    }
-		                ]
-		            }
-		        };
-
-
-var optdata = {
-		        startTime: "07:00", // schedule start time(HH:ii)
-		        endTime: "21:00",   // schedule end time(HH:ii)
-		        widthTime:60 * 10,  // cell timestamp example 10 minutes
-		        timeLineY:60,       // height(px)
-		        verticalScrollbar:20,   // scrollbar (px)
-		        timeLineBorder:2,   // border(top and bottom)
-		        debug:"#debug",     // debug string output elements
-		        rows : schData,
-		        change: function(node,data){
-		            console.log("change event");
-		        },
-		        init_data: function(node,data){
-		        	console.log('init_data');
-		        },
-		        click: function(node,data){
-		            console.log("click event");
-		        },
-		        append: function(node,data){
-		        },
-		        time_click: function(time,data){
-		            console.log("time click event");
-		        },
-		    };
-
-		    var $sc = jQuery("#schedule").timeSchedule(optdata);
-
-			var bdata = {
-                start:'12:00',
-                end:'13:00',
-                text:'Newly Added',
-                data:{
-                }		                    
-			};
-
-			$(document).on("LordJesus", function(){
-				schData.Name.schedule.push(bdata);
-				$sc = jQuery("#schedule").timeSchedule(optdata);
-			});
-			
-
-		});
-	</script>
-</body>
+	<head>
+		<meta charset="utf-8">
+		<link rel="stylesheet" href="/static/css/app_style.css">
+		<link rel="stylesheet" href="/static/css/style.css">
+		<link rel="stylesheet" href="/static/css/font-awesome.min.css">
+		<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&subset=latin,greek-ext,latin-ext,vietnamese' rel='stylesheet' type='text/css'>
+	</head>
+	<body>
+		<header>
+			<div class="container">
+				<div class="logo">
+					<a href="#"><img src="/static/images/logo.png" alt="logo"></a>
+				</div>
+				<ul class="social_media">
+					<li><a href="#" class="icon_rss"><i class="fa fa-rss"></i></a></li>
+					<li><a href="#" class="icon_gplus"><i class="fa fa-google-plus"></i></a></li>
+					<li><a href="#" class="icon_twitter"><i class="fa fa-twitter"></i></a></li>
+					<li><a href="#" class="icon_facebook"><i class="fa fa-facebook"></i></a></li>
+					<li><a href="#" class="icon_dribbble"><i class="fa fa-dribbble"></i></a></li>
+				</ul>
+			</div>
+		</header>
+		<div class="content">
+			<div class="container">
+				<h2 class="heading">Speciality Appointment</h2>
+				<h3 class="subheading">( Just drag and drop your option on Timeline )</h3>
+				<div class="carousel">
+					<a href="#" class="direction prev"><i class="fa fa-arrow-left"></i></a>
+					<a href="#" class="direction next"><i class="fa fa-arrow-right"></i></a>
+					<div class="slider">
+						<ul>
+							<li>
+								<figure><img src="/static/images/orthopedic_icon.png" alt="icon"></figure>
+								<span class="spl_title orth">orthopedic_icon</span>
+							</li>
+							<li>
+								<figure><img src="/static/images/nuerologist_icon.png" alt="icon"></figure>
+								<span class="spl_title nuero">Nuerologist</span>
+							</li>
+							<li>
+								<figure><img src="/static/images/gynaecologist_icon.png" alt="icon"></figure>
+								<span class="spl_title gynae">Gynaecologist</span>
+							</li>
+							<li>
+								<figure><img src="/static/images/dentist_icon.png" alt="icon"></figure>
+								<span class="spl_title dent">Dentist</span>
+							</li>
+							<li>
+								<figure><img src="/static/images/cardiologist_icon.png" alt="icon"></figure>
+								<span class="spl_title cardio">Cardiologist</span>
+							</li>
+							<li>
+								<figure><img src="/static/images/audiologist_icon.png" alt="icon"></figure>
+								<span class="spl_title audiol">Audiologist</span>
+							</li>
+							<li>
+								<figure><img src="/static/images/dermatologist_icon.png" alt="icon"></figure>
+								<span class="spl_title derma">Dermatologist </span>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="schedule">
+			<div class="container">
+				<h2 class="heading">Schedule</h2>
+				<h3 class="subheading">( Just for information )</h3>
+				<div class="weekDetails">
+					<ul>
+						<li>
+							<strong>Monday <br/>30/10</strong>
+							<span class="num mon">1</span>
+						</li>
+						<li>
+							<strong>Tuesday <br/>31/10</strong>
+							<span class="num tue">11</span>
+						</li>
+						<li>
+							<strong>Wednesday <br/>1/11</strong>
+							<span class="num wed">2</span>
+						</li>
+						<li>
+							<strong>Thursday <br/>2/11</strong>
+							<span class="num thur">10</span>
+						</li>
+						<li>
+							<strong>Friday <br/>3/11</strong>
+							<span class="num fri">15</span>
+						</li>
+						<li>
+							<strong>Saturday <br/>4/11</strong>
+							<span class="num sat">7</span>
+						</li>
+						<li>
+							<strong>Sunday <br/>5/11</strong>
+							<span class="num sun">12</span>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class="timeline">
+			<div class="container">
+				<h2 class="heading">Timeline - Monday (30/10)</h2>
+				<h3 class="subheading">( Appointments )</h3>
+			</div>
+			<div id="schedule"></div>
+		</div>
+		<footer>
+			Copyright@2015
+		</footer>
+		<div class="pop_up">
+			<span class="close_btn"><img src="/static/images/close-btn.png"></span>
+			<div class="pop_logo">
+				<img src="/static/images/logo.png">
+			</div>
+			<h3>Orthopedic</h3>
+			<div class="row">
+				<div class="col-lg-6 form-block">
+					<label>From</label>
+					<div class="form-row">
+						<input type="text" placeholder="9.30 AM">
+					</div>
+				</div>
+				<div class="col-lg-6 form-block">
+					<label>To</label>
+					<div class="form-row">
+						<input type="text" placeholder="10.30 AM">
+					</div>
+				</div>
+			</div>
+			<h4>Available Specialists</h4>
+			<ul class="doctorsList">
+				<li>
+					<figure><img src="/static/images/doctor-1.png"></figure>
+					<span>Doctor A</span>
+				</li>
+				<li>
+					<figure><img src="/static/images/doctor-2.png"></figure>
+					<span>Doctor B</span>
+				</li>
+				<li>
+					<figure><img src="/static/images/doctor-3.png"></figure>
+					<span>Doctor C</span>
+				</li>
+			</ul>
+		</div>
+		<div class="shadow"></div>
+		<script src="/static/js/jquery-1.11.3.min.js"></script>
+		<script src="/static/js/jquery-ui.min.js"></script>
+		<script src="/static/js/jq.schedule.js"></script>
+		<script src="/static/js/custom.js"></script>
+		<script src="/static/js/datedropper.min.js"></script>
+		<script src="/static/js/jquery-clockpicker.min.js"></script>
+		<script src="/static/js/app.js"></script>
+	</body>
 </html>

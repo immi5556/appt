@@ -1,46 +1,65 @@
-<div>
-        <p><h3>Website Display Configuration</h3></p>
+<form action="/upload" method="post" enctype="multipart/form-data">
+    <div>
+            <p><h3>Website Display Configuration</h3></p>
+            <table>
+                <tr>
+                    <td>Company Name:</td>
+                    <td><input type="text"  id="wsClientName"></td>
+                </tr>
+                <tr>
+                    <td>Subdomain:</td>
+                    <td><input type="text" id="sdomain"></td>
+                </tr>
+                <tr>
+                    <td>Logo:</td>
+                    <td><input type="file" name="logopic" id="logo"></td>
+                </tr>
+                <tr>
+                    <td>Logo Url:</td>
+                    <td><input type="text" id="logourl"></td>
+                </tr>
+                <tr>
+                    <td>Select Icon:</td>
+                    <td><input type="file" id="selIcon"></td>
+                </tr>
+            </table>
+    </div>
+    
+    <div>
+        <p><h3>Company Details</h3></p>
         <table>
             <tr>
-                <td>Company Name:</td>
-                <td><input type="text" id="wsClientName"></td>
+                <td>Full Name:</td>
+                <td><input type="text" id="ClientName"></td>
             </tr>
             <tr>
-                <td>Subdomain:</td>
-                <td><input type="text" id="sdomain"></td>
+                <td>Business Type:</td>
+                <td>
+                    <select id="bstType">
+                        <option value="hospital">Hospital</option>
+                        <option value="training">Training</option>
+                        <option value="lawfirm">Law Firm</option>
+                        <option value="doctors">Doctors</option>
+                        <option value="other">Other</option>
+                    </select> <br>
+                    <input type="text" id="busTypeOther" style="display:none;" />
+                </td>
+            </tr> 
+            <tr>
+                <td>Phone:</td>
+                <td><input type="text" id="phoneName"></td>
             </tr>
             <tr>
-                <td>Logo:</td>
-                <td><input type="file" id="logo"></td>
+                <td>Email:</td>
+                <td><input type="text" id="email"></td>
             </tr>
             <tr>
-                <td>Select Icon:</td>
-                <td><input type="file" id="selIcon"></td>
+                <td>Business Detail:</td>
+                <td><textarea id="bdet"></textarea></td>
             </tr>
         </table>
-</div>
-<div>
-    <p><h3>Company Details</h3></p>
-    <table>
-        <tr>
-            <td>Full Name:</td>
-            <td><input type="text" id="ClientName"></td>
-        </tr>
-        <tr>
-            <td>Phone:</td>
-            <td><input type="text" id="phoneName"></td>
-        </tr>
-        <tr>
-            <td>Email:</td>
-            <td><input type="text" id="email"></td>
-        </tr>
-        <tr>
-            <td>Business Detail:</td>
-            <td><textarea id="bdet"></textarea></td>
-        </tr>
-    </table>
-    
     </div>
+
     <div>
     <p><h3>Appointment Configuration</h3></p>
     <table>
@@ -61,29 +80,6 @@
             <td><input type="text" id="perdayCap"></td>
         </tr>
         <tr>
-            <td>Preconfigured:</td>
-            <td>
-                <input type="checkbox" id="preConfigured">
-                <div id="preCondWin">
-                    <div>
-                        <div style="float:left"><input value="Legal Consulting" /></div>
-                        <div style="float:left"><input value="1 hr" /></div>
-                        <div style="float:left"><a href="javascript:void(0)">Add</a></div>
-                    </div>
-                    <div>
-                        <div style="float:left"><input value="Document Detailed Verification" /></div>
-                        <div style="float:left"><input value="4 hrs" /></div>
-                        <div style="float:left"><a href="javascript:void(0)">Add</a></div>
-                    </div>
-                    <div>
-                        <div style="float:left"><input /></div>
-                        <div style="float:left"><input /></div>
-                        <div style="float:left"><a href="javascript:void(0)">Add</a></div>
-                    </div>
-                </div>
-            </td>
-        </tr>
-        <tr>
             <td>Overlap:</td>
             <td><input type="checkbox" id="wrkHrsOverlap"></td>
         </tr>
@@ -96,64 +92,21 @@
             <td><input type="checkbox" id="autoAcknowledge"></td>
         </tr>
         <tr>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td>Selection Option:</td>
+            <td>Preconfigured:</td>
             <td>
-                <input type="checkbox" id="selOptions">
-                <div id="selOptions">
-                <div>
-                    <div style="float:left"><span>Legal Consulting</span></div>
-                        <div style="float:left"><a href="javascript:void(0)">Add</a></div>
-                        <div style="float:left;visibility:hidden;"><input /></div>
-                    </div>
-                    <div>
-                        <div style="float:left"><input value="Mark Lawrence" style="width:200px" /></div>
-                        <div style="float:left;display:none;"><input /></div>
-                        <div style="float:left"><a href="javascript:void(0)">Del</a></div>
-                    </div>
-                    <div>
-                        <div style="float:left"><input value="Lr. Sathasivam Kartheesan" style="width:200px" /></div>
-                        <div style="float:left;display:none;"><input /></div>
-                        <div style="float:left"><a href="javascript:void(0)">Del</a></div>
-                    </div>
-                    <div style="float:left"><span>Document Detailed Verification</span></div>
-                        <div style="float:left"><a href="javascript:void(0)">Add</a></div>
-                        <div style="float:left;visibility:hidden;"><input /></div>
-                    </div>
-                    <div>
-                        <div style="float:left"><input value="Mark Lawrence" style="width:200px" /></div>
-                        <div style="float:left;display:none;"><input /></div>
-                        <div style="float:left"><a href="javascript:void(0)">Del</a></div>
-                    </div>
-                    <div>
-                        <div style="float:left"><input value="Lr. Sathasivam Kartheesan" style="width:200px" /></div>
-                        <div style="float:left;display:none;"><input /></div>
-                        <div style="float:left"><a href="javascript:void(0)">Del</a></div>
-                    </div>
-                </div>
+                <input type="checkbox" id="preConfigured" style="display:none;">
+                <div style="float:left"><a href="javascript:void(0)" id="add-spltyy">Add Speciality</a></div>
             </td>
-        </tr>  
+        </tr>
+        
         </table>  
-      <input id="sveWs" type="button" value="submit">  
+      <input id="sveWs" type="submit" value="submit">  
     </div>
+
+
     <div id="alert-pop" style="display: none;color:white;">
             <div id='resp-cont'>
 
             </div>
     </div>
-</div>
+</form>  
