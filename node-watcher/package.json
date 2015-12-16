@@ -1,0 +1,8 @@
+{
+  "name": "node-watch",
+  "version": "0.0.1",
+  "dependencies": {
+    "chokidar": "^1.4.0",
+    "filewatcher": "^3.0.0"
+  }
+}

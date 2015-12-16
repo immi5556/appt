@@ -19,6 +19,8 @@
             init_data: null,
             change: null,
             click: null,
+            dblclick: null,
+            time_dblclick: null,
             append: null,
             time_click: null,
             debug:""			// debug selecter
@@ -106,13 +108,20 @@
             var key = scheduleData.length - 1;
             $bar.data("sc_key",key);
 
-            $bar.bind("mouseup",function(){
+            $bar.bind("mouseup, dblclick",function(){
                 // コールバックがセットされていたら呼出
                 if(setting.click){
                     if(jQuery(this).data("dragCheck") !== true && jQuery(this).data("resizeCheck") !== true){
                         var node = jQuery(this);
                         var sc_key = node.data("sc_key");
                         setting.click(node, scheduleData[sc_key]);
+                    }
+                }
+                if(setting.dblclick){
+                    if(jQuery(this).data("dragCheck") !== true && jQuery(this).data("resizeCheck") !== true){
+                        var node = jQuery(this);
+                        var sc_key = node.data("sc_key");
+                        setting.dblclick(node, scheduleData[sc_key]);
                     }
                 }
             });
@@ -160,6 +169,11 @@
             // クリックイベント
             if(setting.time_click){
                 $timeline.find(".tl").click(function(){
+                    setting.time_click(this,jQuery(this).data("time"),jQuery(this).data("timeline"),timelineData[jQuery(this).data("timeline")]);
+                });
+            }
+            if(setting.time_dblclick){
+                $timeline.find(".tl").dblclick(function(){
                     setting.time_click(this,jQuery(this).data("time"),jQuery(this).data("timeline"),timelineData[jQuery(this).data("timeline")]);
                 });
             }
@@ -227,6 +241,44 @@
 
             return data;
         };
+
+        this.checkOverlapCount = function(n){
+            /*var st = Math.ceil((data["start"] - tableStartTime) / setting.widthTime);
+            var et = Math.floor((data["end"] - tableStartTime) / setting.widthTime);
+            var $bar = jQuery('<div class="sc_Bar"><span class="head"><span class="time"></span></span><span class="text"></span></div>');
+            var stext = element.formatTime(data["start"]);
+            var etext = element.formatTime(data["end"]);
+            var snum = element.getScheduleCount(data["timeline"]);
+            $bar.css({
+                left : (st * setting.widthTimeX),
+                top : ((snum * setting.timeLineY) + setting.timeLinePaddingTop),
+                width : ((et - st) * setting.widthTimeX),
+                height : (setting.timeLineY)
+            });
+            $bar.find(".time").text(stext+"-"+etext);
+            if(data["text"]){
+                $bar.find(".text").text(data["text"]);
+            }
+            if(data["class"]){
+                $bar.addClass(data["class"]);
+            } */
+            var $bar_list = $element.find('.sc_main .timeline').eq(n).find(".sc_Bar");
+            var codes, cnt = 0;
+            var s = element.calcStringTime($("#startTime").val());
+            var e = element.calcStringTime($("#endTime").val());
+            var xt = Math.ceil((s - tableStartTime) / setting.widthTime) * setting.widthTimeX;
+            var yt = Math.floor((e - tableStartTime) / setting.widthTime) * setting.widthTimeX;
+            //var wt = ((et - xt) * setting.widthTimeX);
+            //var yt = xt + wt;
+            for(var i=0;i<$bar_list.length;i++){
+                var poss = jQuery($bar_list[i]).position(), olap = false;
+                codes = {code:i,x:poss.left,y:(poss.left + jQuery($bar_list[i]).width())};
+                if ((xt >= codes.x && xt <= codes.y) || (yt >= codes.x && yt <= codes.y) || (xt < codes.x && yt > codes.y)){
+                    cnt++;
+                }
+            };
+            return cnt;
+        }
         
         this.resetBarPosition = function(n){
             // 要素の並び替え

@@ -1,0 +1,43 @@
+To dos: 
+1. Lunch break inclusion
+2. partial working days for a particular day
+3. allow partial working hours for particular resource.
+3. Unique user identified based on Mac for mobile & from browser wtih IP (60% accuracy) [Trying to do without registration]
+
+
+{
+    start:'09:00',
+    end:'12:00',
+    text:'Text Area',
+    data:{
+    }
+},
+{
+    start:'15:00',
+    end:'16:00',
+    text:'Text Area',
+    data:{
+    }
+},
+{
+    start:'11:00',
+    end:'14:00',
+    text:'Text Area',
+    data:{
+    }
+},
+{
+    start:'14:00',
+    end:'15:00',
+    text:'Text Area',
+    data:{
+    }
+}
+
+{
+   start:'16:00',
+   end:'17:00',
+   text:'Text Area',
+   data:{
+   }
+}

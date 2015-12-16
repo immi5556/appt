@@ -1,0 +1,29 @@
+html
+  head
+    //include ./../includes/head.jade
+  body
+    div(class="section group")
+      h2!= 'Admin Page'
+      table
+        th= 'Name'
+        th='Email'
+        th='Status'
+        th='Url'
+        th='Created'
+          each vl, idx in val
+            tr
+              td=vl.regis.name
+              td=vl.regis.email
+              td=vl.action
+              td
+                a(href='http://registration.que.one/' + vl.uniqueid)='manage'
+              td=moment(vl.createdat).format('YYYY-MM-DD HH:mm:ss')
+    
+    //    div(class="col span_" + (idx + 1) + "_of_" + header.sections.length)
+    //      h2!= val.content
+    //div(class="section group main-content")
+    //  div(class="col span_6_of_10 middler")
+    //     include ./../static/test/ittile.html
+    //  div(class="col span_4_of_10 middler")
+    //    h1!= 'Site Content Goes Here'
+  //include ./../includes/foot.jade  

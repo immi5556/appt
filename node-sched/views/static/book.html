@@ -1,0 +1,96 @@
+<div style="height:20px;"></div>
+<div id="schedule"></div>
+<div class="pop_up">
+    <span class="close_btn"><img src="/static/images/close-btn.png"></span>
+    <div class="pop_logo">
+        <!-- <img src="/static/images/logo.png"> -->
+    </div>
+    <h3 id="sHead"></h3>
+    <div class="row">
+        <div class="col-lg-6 form-block">
+            <label>From</label>
+            <div class="form-row">
+                <input type="text" id="startTime" class="clockpicker" data-autoclose="true" placeholder="9.30 AM">
+            </div>
+        </div>
+        <div class="col-lg-6 form-block">
+            <label>To</label>
+            <div class="form-row">
+                <input type="text" id="endTime" class="clockpicker" data-autoclose="true" placeholder="10.30 AM">
+            </div>
+        </div>
+    </div>
+    <div class="row" id="id-err"></div>
+    <div class="row">
+        <div class="col-lg-12 form-block">
+            <label>Mobile</label>
+            <div class="form-row">
+                <input type="text" id="apMobile" placeholder="Mobile">
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12 form-block">
+            <label>Email</label>
+            <div class="form-row">
+                <input type="text" id="apEmail" placeholder="Email">
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12 form-block">
+            <label>Details</label>
+            <div class="form-row">
+                <textarea id="apDet" rows="3"></textarea>
+            </div>
+        </div>
+    </div>
+    <h4 id="ress-headd">Available Resources</h4>
+    <ul class="doctorsList" id="ress-avail">
+        <li>
+            <figure><img src="/static/images/doctor-1.png"></figure>
+            <span>Doctor A</span>
+        </li>
+        <li>
+            <figure><img src="/static/images/doctor-2.png"></figure>
+            <span>Doctor B</span>
+        </li>
+        <li>
+            <figure><img src="/static/images/doctor-3.png"></figure>
+            <span>Doctor C</span>
+        </li>
+    </ul>
+    <input type="button" value="Submit" id="aptSubmit">
+</div>
+<div class="shadow"></div>
+<div style="display:none;color:white;" id="modal">
+    <h2>Appointment</h2>
+    <table style="color:white;">
+        <tr>
+            <td>Start Time:</td>
+            <td><input type="text" class="clockpicker" id="txtStrtTime"></td>
+        </tr>
+        <tr>
+            <td>End Time:</td>
+            <td><input type="text" class="clockpicker" id="txtendtime"></td>
+        </tr>
+        <tr>
+            <td>Details:</td>
+            <td><textarea id="txtDeta" rows="4"></textarea></td>
+        </tr>
+        <tr>
+            <td>Name:</td>
+            <td><input type="text" id="apName"></td>
+        </tr>
+        <tr>
+            <td>Email:</td>
+            <td><input type="text" id="apEmail"></td>
+        </tr>
+        <tr>
+            <td>Mobile:</td>
+            <td><input type="text" id="apMob"></td>
+        </tr>
+    </table>
+    <span id="alert-pop"></span>
+    <input type="button" value="Submit" id="aptSubmit">
+</div>

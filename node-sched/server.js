@@ -5,6 +5,7 @@ var jade = require('jade');
 var daler = require('./dal/daler.js').daler;
 var url = require('url');
 var path = require('path');
+var favicon = require('serve-favicon');
 
 var opts ={
 	app: app,
@@ -13,6 +14,7 @@ var opts ={
 	jade: jade
 }
 
+app.use(favicon(__dirname + '/favicon.ico'));
 app.use('/static', express.static(__dirname + '/public'));
 app.set('view engine', 'jade');
 
@@ -42,7 +44,7 @@ app.get("/", function(req, res){
 			return;
 		}
 		res.render('index', { val: data[0] });
-	})
+	});
 });
 
 app.get("/sched", function(req, res){

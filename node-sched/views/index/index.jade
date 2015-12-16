@@ -1,0 +1,87 @@
+html
+  head
+    title #{title}
+    link(rel='stylesheet', href='/static/css/app_style.css')
+    link(rel='stylesheet', href='/static/css/datedropper.css')
+    link(rel='stylesheet', href='/static/css/style.css')
+    link(rel='stylesheet', href='/static/css/font-awesome.min.css')
+    link(rel='stylesheet', href='/static/css/jquery-clockpicker.min.css')
+  body
+    div(style="display:none")
+      span(id="compTbl")=val.subdomain
+    div(id="header")
+      //h2!= val.ClientName + ' [' + val.email + ']'
+      header
+        div(class="container")
+          div(class="logo")
+            a(href=(val.logoUrl ||  'http://www.que.one'))
+              img(src=(val.logoPath || "uploaded/sample-logo.jpg") alt="logo" style="width:100px;height:60px;")
+          ul(class="social_media")
+            li
+              a(href="#" class="icon_rss")
+                i(class="fa fa-rss")
+            li
+              a(href="#" class="icon_gplus")
+                i(class="fa fa-google-plus")
+            li
+              a(href="#" class="icon_twitter")
+                i(class="fa fa-twitter")
+            li
+              a(href="#" class="icon_facebook")
+                i(class="fa fa-facebook")
+            li
+              a(href="#" class="icon_dribbble")
+                i(class="fa fa-dribbble")
+      div.content
+        div.container
+          h2.heading=val.companyName
+          //h3.subheading= '( Just drag and drop your option on Timeline )'
+          div.carousel
+            a(href="#" class="direction prev")
+              i(class="fa fa-arrow-left")
+            a(href="#" class="direction next")
+              i(class="fa fa-arrow-right")
+            div.slider
+              ul
+                each vl, idx in val.specialities
+                  li
+                    figure
+                      img(src=(vl.icon || "uploaded/dentist_icon.png") style="width:100px;height:75px;" alt="icon")
+                    span(class="spl_title orth" data-que-idx=idx)=vl.name
+        div.schedule
+          div.container
+            h2.heading
+              |Schedule
+            div.weekDetails
+              ul
+                li
+                  strong#wday1
+                  span(class="num" id="apptcnt1")
+                li
+                  strong#wday2
+                  span(class="num" id="apptcnt2")
+                li
+                  strong#wday3
+                  span(class="num" id="apptcnt3")
+                li
+                  strong#wday4
+                  span(class="num" id="apptcnt4")
+                li
+                  strong#wday5
+                  span(class="num" id="apptcnt5")
+                li
+                  strong#wday6
+                  span(class="num" id="apptcnt6")
+                li
+                  strong#wday7
+                  span(class="num mon" id="apptcnt7")
+  include ./../static/book.html
+  script(src='/static/js/jquery-1.11.3.min.js')
+  script(src='/static/js/jquery-ui.min.js')
+  script(src='/static/js/jq.schedule.js')
+  script(src='/static/js/datedropper.min.js')
+  script(src='/static/js/moment.js')
+  script(src='/static/js/custombox.min.js')
+  script(src='/static/js/jquery-clockpicker.min.js')
+  script(src='/static/js/custom.js')
+  script(src='/static/js/app.js')

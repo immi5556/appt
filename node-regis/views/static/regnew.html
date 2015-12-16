@@ -1,0 +1,202 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>Registration</title>
+    <link rel="stylesheet" href="static/css/style.css" />
+	<link rel="stylesheet" href="static/css/font-awesome.min.css" />
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,800,700italic,700,600,300&subset=latin,greek,latin-ext' rel='stylesheet' type='text/css'>
+</head>
+<body>
+    <header>
+        <h1>Registration Page</h1>
+    </header>
+    <div class="main">
+        <div class="container">
+            <!--<div class="tabNav">
+                <ul>
+                    <li><a href="#">Personal Details</a></li>
+                    <li><a href="#">Website Display Configuration</a></li>
+                    <li><a href="#">Company Details</a></li>
+                    <li><a href="#">Appointment Configuration</a></li>
+                </ul>
+            </div>-->
+            <div class="tabContainer">
+                <div class="tabContent">
+                    <h2>Your Account Details</h2>
+                    <div method="get">
+                        <div class="item_row">
+                            <label>EMAIL</label>
+                            <input type="email" class="fieldItem1" />
+                        </div>
+                        <div class="item_row">
+                            <label>USERNAME</label>
+                            <input type="text" class="fieldItem1" />
+                        </div>
+                        <div class="item_row">
+                            <label>STATUS</label>
+                            <input type="text" class="fieldItem1" />
+                        </div>
+                        <div class="item_row">
+                            <label>CREATED</label>
+                            <input type="text" class="fieldItem1" />
+                        </div>
+                    </div>
+                    
+                </div>
+                <div class="tabContent">
+                    <h2>Website Display Configuration</h2>                    
+                    <div method="get">
+                        <div class="item_row">
+                            <label>Company Name</label>
+                            <input type="text" class="fieldItem1" />
+                        </div>
+                        <div class="item_row">
+                            <label>Subdomain</label>
+                            <input type="text" class="fieldItem1" />
+                        </div>
+                        <div class="item_row">
+                            <label>Logo</label>
+                            <div class="fieldItem1 fieldset-Item">                                            
+								<div class="file-upload">
+								<i class="fa fa-upload"></i> 
+								<input class="upload" id="uploadBtn" type="file"></div>
+								<input id="uploadFile" type="text" disabled="disabled" placeholder="Choose File">
+							</div>
+							<div class="logo_path">
+								<img src="static/images/sample-logo.jpg">
+							</div>
+                        </div>
+                        <div class="item_row">
+                            <label>Logo Url</label>
+                            <input type="text" class="fieldItem1" />
+                        </div>
+                    </div>
+                    
+                </div>
+                <div class="tabContent">
+                    <h2>Company Details</h2>                    
+                    <div method="get">
+                        <div class="item_row">
+                            <label>Full Name</label>
+                            <input type="text" class="fieldItem1" />
+                        </div>
+                        <div class="item_row">
+                            <label>Business Type</label>
+                            <select class="fieldItem1">
+								<option>Hospital</option>
+								<option>Training</option>
+								<option>Law Firm</option>
+								<option>Doctors</option>
+								<option>Other</option>
+							</select>
+                        </div>
+                        <div class="item_row">
+                            <label>Phone</label>
+                            <input type="text" class="fieldItem1" />
+                        </div>
+                        <div class="item_row">
+                            <label>Email</label>
+                            <input type="email" class="fieldItem1" />
+                        </div>
+						<div class="item_row">
+                            <label>Business Detail</label>
+                            <textarea rows="2" cols="4" class="fieldItem1 text-area" ></textarea>
+                        </div>
+                    </div>
+                    
+                </div>
+                <div class="tabContent">
+                    <h2>Appointment Configuration</h2>                    
+                    <div method="get">
+                        <div class="item_row">
+                            <label>Concurrent Count</label>
+                            <input type="text" class="fieldItem1" />
+                        </div>
+                        <div class="item_row">
+                            <label>Working Hour Start</label>
+                            <input type="text" class="fieldItem1" />
+                        </div>
+                        <div class="item_row">
+                            <label>Working Hour End</label>
+                            <input type="text" class="fieldItem1" />
+                        </div>
+                        <div class="item_row">
+                            <label>Perday Capacity</label>
+                            <input type="text" class="fieldItem1" />
+                        </div>
+						<ul class="list-row">
+							<li>
+								<label class="fieldItem1">
+									<input type="checkbox" class="checkItem">
+									<strong class="check-btn"></strong>
+									<span>Overlap</span>
+								</label>
+							</li>
+							<li>
+								<label class="fieldItem1">
+									<input type="checkbox" class="checkItem"/>
+									<strong class="check-btn"></strong>
+									<span>Allow Custom</span>
+								</label>
+							</li>
+							<li>
+								<label class="fieldItem1">
+									<input type="checkbox" class="checkItem"/>
+									<strong class="check-btn"></strong>
+									<span>Auto Acknowledge</span>
+								</label>
+							</li>
+						</ul>
+						
+                    </div>
+                    
+                </div>
+				<div class="tabContent">
+					<h2>Service Configuration</h2>
+					<div class="item_row">                            
+                            <div class="addData">
+								<label><a href="#" class="add_btn"><i class="fa fa-plus"></i> Speciality</a></label>
+								<div class="addrow">
+									<input type="text" class="fieldItem1 fieldwid1" />
+									<input type="text" class="fieldItem1 fieldwid2" />
+									<div class="file-upload">
+										<i class="fa fa-upload"></i> 
+										<input class="upload" id="uploadBtn" type="file">
+									</div>
+									<div class="imgIcon">
+										<img src="static/images/sample-logo.jpg">
+									</div>
+									<a href="#" class="delete"><i class="fa fa-trash"></i></a>
+								</div>
+							</div>
+							
+                        </div>
+						<div class="item_row">
+							<div class="addData">
+								<label><a href="#" class="add_btn resource"><i class="fa fa-plus"></i> Resource</a></label>
+								<div class="addrow">
+									<input type="text" class="fieldItem1 fieldwid1" />
+									<input type="text" class="fieldItem1 fieldwid2" />
+									<div class="file-upload">
+										<i class="fa fa-upload"></i> 
+										<input class="upload" id="uploadBtn" type="file">
+									</div>
+									<div class="imgIcon">
+										<img src="static/images/sample-logo.jpg">
+									</div>
+									<a href="#" class="delete"><i class="fa fa-trash"></i></a>
+								</div>
+							</div>
+						</div>
+				</div>
+				<a href="#" class="btn right">SUBMIT</a>
+            </div>
+        </div>
+    </div>
+	<footer></footer>
+    <script src="static/js/jquery-1.11.3.min.js"></script>
+    <script src="static/js/custom.js"></script>
+</body>
+</html>

@@ -1,0 +1,177 @@
+html
+  head
+    title Registration
+    link(rel='stylesheet', href='static/css/style.css')
+    link(rel='stylesheet', href='static/css/font-awesome.min.css')
+    link(rel='stylesheet', href='/styles/datedropper.css')
+    link(rel='stylesheet', href='/styles/jquery-clockpicker.min.css')
+    link(rel='stylesheet', href='/styles/custombox.min.css')
+    link(rel='stylesheet', href='https://fonts.googleapis.com/css?family=Open+Sans:400,800,700italic,700,600,300&subset=latin,greek,latin-ext' type='text/css')
+  body
+    header
+      h1='Registration Page'
+    div(style='display:none')
+      input(type='hidden' id='_emailstore' name='emailstore' value=val.landing ? val.landing.regis.email: "")
+      input(type='hidden' id='_idstore' name='_idstore' value=val.landing ? val.landing._id : "")
+      input(type='hidden' id='_uniqueid' name='_uniqueid' value=val.landing ? val.landing.uniqueid : "")
+      input(type='hidden' id='_idclient' name='__idclient' value=val._id)
+    div(class="main")
+      div(class="container")
+        div(class="tabContainer")
+          div(class="tabContent")
+            h2='Your Account Details'
+            div
+              div(class="item_row")
+                Label='EMAIL'
+                input(type="email" id="_email" readonly class="fieldItem1" value=val.landing ? val.landing.regis.email : "")
+              div(class="item_row")
+                Label='USERNAME'
+                input(type="text" id="_name" readonly class="fieldItem1" value=val.landing ? val.landing.regis.name: "")
+              div(class="item_row")
+                Label='STATUS'
+                input(type="text" id="_status" readonly class="fieldItem1" value=val.landing ? val.landing.action: "")
+              div(class="item_row")
+                Label='CREATED'
+                input(type="text" id="_createdlandingat" readonly class="fieldItem1" value=val.landing ? moment(val.landing.createdat).format('YYYY-MM-DD HH:mm:ss') : "")
+          div(class="tabContent")
+            h2='Website Display Config'
+            div
+              div(class="item_row")
+                Label='Company Name'
+                input(type="text" class="fieldItem1" id="companyName" value=val.companyName)
+              div(class="item_row")
+                Label='Subdomain'
+                input(type="text" class="fieldItem1" id="subdomain" value=val.subdomain readonly=val.subdomain)
+              div(class="item_row")
+                Label='Logo'
+                div(class="fieldItem1 fieldset-Item")
+                  div(class="file-upload")
+                    i(class="fa fa-upload")
+                    input(class="upload" id="uploadBtn" type="file" name="files[]" data-url="/upload")
+                  input(id="uploadFile" type="text" disabled="disabled" placeholder="Choose File")
+                div(class="logo_path")
+                  img(id="logoPath" src=(val.logoPath || "static/images/sample-logo.jpg") style="width:80px;height:60px;")
+              div(class="item_row")
+                label='Logo Url'
+                input(type="text" class="fieldItem1" id="logoUrl" value=val.logoUrl)
+          div(class="tabContent")
+            h2='Company Details'
+            div
+              div(class="item_row")
+                Label='Full Name'
+                input(type="text" class="fieldItem1" id="fullName" value=val.fullName)
+              div(class="item_row")
+                Label='Business Type'
+                select(class="fieldItem1" id="businessType")
+                  option(value="Hospital" selected=('Hospital'== val.businessType))='Hospital'
+                  option(value="Training" selected=('Training'== val.businessType))='Training'
+                  option(value="Law Firm" selected=('Law Firm'== val.businessType))='Law Firm'
+                  option(value="Doctors" selected=('Doctors'== val.businessType))='Doctors'
+                  option(value="Other" selected=('Other'== val.businessType))='Other'
+              div(class="item_row")
+                Label='Mobile'
+                input(type="text" class="fieldItem1" id="mobile" value=val.mobile)
+              div(class="item_row")
+                label='Email'
+                input(type="email" class="fieldItem1" id="companyEmail" value=val.companyEmail)
+              div(class="item_row")
+                label='Business Detail'
+                textarea(rows="2" cols="4" class="fieldItem1 text-area" id="details")=val.details
+          div(class="tabContent")
+            h2='Appointment Configuration'
+            div
+              div(class="item_row")
+                Label='Disclaimer'
+                input(type="text" class="fieldItem1" id="disclaimer" value=val.disclaimer)
+              div(class="item_row")
+                Label='Concurrent Count'
+                input(type="text" class="fieldItem1" id="concurrentCount" value=val.concurrentCount)
+              div(class="item_row")
+                Label='Working Hour Start'
+                div(class="clockpicker" data-placement="bottom" data-align="top" data-autoclose="true")
+                  input(type="text" class="fieldItem1" id="startHour" value=val.startHour)
+                  span.input-group-addon
+                    spn(class="glyphicon glyphicon-time")
+              div(class="item_row")
+                label='Working Hour End'
+                div(class="clockpicker" data-placement="bottom" data-align="top" data-autoclose="true")
+                  input(type="text" class="fieldItem1" id="endHour" value=val.endHour)
+                  span.input-group-addon
+                    spn(class="glyphicon glyphicon-time")
+              div(class="item_row")
+                label='Perday Capacity'
+                input(type="text" class="fieldItem1" id="perdayCapacity" value=val.perdayCapacity)
+              ul(class="list-row")
+                li
+                  label(class="fieldItem1")
+                    input(type="checkbox" class="checkItem" id="overlap" checked=val.overlap)
+                    strong(class="check-btn")
+                    span='Overlap'
+                li
+                  label(class="fieldItem1")
+                    input(type="checkbox" class="checkItem" id="allowCustom" checked=val.allowCustom)
+                    strong(class="check-btn")
+                    span='Allow Custom'
+                li
+                  label(class="fieldItem1")
+                    input(type="checkbox" class="checkItem" id="autoAcknowledge" checked=val.autoAcknowledge)
+                    strong(class="check-btn")
+                    span='Auto Acknowledge'
+          div(class="tabContent")
+            h2='Service Configuration'
+            div
+              div(class="item_row_full")
+                div(class="addData add-spl-data")
+                  label
+                    a(class="add_btn ad-spl-btn")
+                      i(class="fa fa-plus")
+                      | Speciality
+                  each vl in (val.specialities || [])
+                    div.splty-container
+                      div(class="addrow splty-row" style="background-color:red;")
+                        input(type="text" class="fieldItem1 fieldwid1 splty-name" value=vl.name)
+                        input(type="text" class="fieldItem1 fieldwid2 splty-mins" value=vl.mins)
+                        div(class="file-upload")
+                          i(class="fa fa-upload")
+                          input(class="upload upload-splty" id="uploadBtn2" type="file" name="files[]" data-url="/upload")
+                        div.imgIcon
+                          img(class="splty-icon" src=(vl.icon || "static/images/sample-logo.jpg"))
+                        a(class="delete del-splt")
+                          i(class="fa fa-trash")
+                        label
+                          a(class="add_btn resource add-ress-btn")
+                            i(class="fa fa-plus")
+                          |Resource
+                      each vl1 in vl.resources
+                        div(class="addrow ress-row")
+                          input(type="text" class="fieldItem1 fieldwid1 res-name" value=vl1.name)
+                          input(type="text" class="fieldItem1 fieldwid2 res-mins" value=vl1.mins)
+                          div(class="file-upload")
+                            i(class="fa fa-upload")
+                            input(class="upload upload-ress" id="uploadBtn1" type="file" name="files[]" data-url="/upload")
+                          div.imgIcon
+                            img(class="res-icon" src=(vl1.icon || "static/images/sample-logo.jpg"))
+                          a(class="delete del-rsrc")
+                            i(class="fa fa-trash")
+        a(id="sveWs" class="btn right")='SUBMIT'
+  footer
+div(id="alert-pop" style="display:none")
+  div(id="resp-cont" style="color:white")
+script(src="static/js/jquery-1.11.3.min.js")
+script(src='/scripts/metrojs.js')
+script(src="/scripts/upl/jquery.ui.widget.js")
+script(src="/scripts/upl/load-image.all.min.js")
+script(src="/scripts/upl/canvas-to-blob.min.js")
+script(src="/scripts/upl/jquery.iframe-transport.js")
+script(src="/scripts/upl/jquery.fileupload.js")
+script(src="/scripts/upl/jquery.fileupload-process.js")
+script(src="/scripts/upl/jquery.fileupload-image.js")
+script(src="/scripts/upl/jquery.fileupload-audio.js")
+script(src="/scripts/upl/jquery.fileupload-video.js")
+script(src="/scripts/upl/jquery.fileupload-validate.js")
+script(src="/scripts/upl/jquery.fileupload-ui.js")
+script(src="/scripts/datedropper.min.js")
+script(src="/scripts/jquery-clockpicker.min.js")
+script(src="/scripts/custombox.min.js")
+script(src="static/js/custom.js")
+script(src="static/js/app.js")
