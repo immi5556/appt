@@ -5,7 +5,7 @@ var geoip = require('geoip-lite');
 module.exports = function(app, opts){
 
 
-var sessionManage = function(req){
+var sessionManage = function(req, callback){
   opts.localSession = req.session;
     if (!opts.localSession.city){
     var ip = requestIp.getClientIp(req);
@@ -13,27 +13,13 @@ var sessionManage = function(req){
     var geo = (geoip.lookup(ip) || {});
     console.log("The IP is %s, city : %s", geoip.pretty(ip),(geo.city || 'Nil'));
       opts.localSession.city = geo.city || 'Nil';
+      opts.localSession.geo = geo;
       opts.daler.logTrace(geo);
     }
+    if (callback){
+      callback(opts.localSession.geo);
+    }
   }
-
-  // app.post('/upload/:uuid', function (req, res) {
-  //   //console.log(req.body);
-  //   uploadFile(req, res, function(err, resp){
-  //     var obj = req.body;
-  //     console.log("complee uploading...");
-  //     console.log(req.files);
-  //     obj.logopic = (req.files.logopic || [''])[0].path;
-  //     obj.selIcon = (req.files.selIcon || [''])[0].path
-  //     opts.daler.checkDomain(obj, function(err){
-  //       if(err){
-  //         res.status(500).send(err);
-  //         return;
-  //       }
-  //       res.redirect("/" + req.params.uuid);
-  //    });
-  //   });
-  // });
 
   app.get('/admin', function (req, res) {
     sessionManage(req);
@@ -58,10 +44,20 @@ var sessionManage = function(req){
   });
 
   app.get('/:uuid', function (req, res) {
-    sessionManage(req);
     opts.daler.getRegister({ uniqueid: req.params.uuid }, function(data){
-      console.log(data);
-      res.render('index/regis', { val: data });
+      if (data.geo){
+        console.log(data);
+        res.render('index/regis', { val: data });
+      }
+      else {
+        sessionManage(req, function(geo){
+          data.geo = opts.utils.extend({
+            country: "", region: "", city: "", metro:0, ll: [0, 0]
+          }, geo, true);
+          console.log(data);
+          res.render('index/regis', { val: data });
+        });
+      }
     });
   });
 

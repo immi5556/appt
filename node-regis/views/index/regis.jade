@@ -15,6 +15,8 @@ html
       input(type='hidden' id='_idstore' name='_idstore' value=val.landing ? val.landing._id : "")
       input(type='hidden' id='_uniqueid' name='_uniqueid' value=val.landing ? val.landing.uniqueid : "")
       input(type='hidden' id='_idclient' name='__idclient' value=val._id)
+      input(type='hidden' id='_idmetro' name='__idmetro' value=val.geo ? val.geo.metro: 0)
+      input(type='hidden' id='_idregion' name='__idregion' value=val.geo ? val.geo.region: "")
     div(class="main")
       div(class="container")
         div(class="tabContainer")
@@ -77,6 +79,18 @@ html
               div(class="item_row")
                 label='Business Detail'
                 textarea(rows="2" cols="4" class="fieldItem1 text-area" id="details")=val.details
+              div(class="item_row")
+                label='City'
+                input(type="text" class="fieldItem1" id="companyCity" value=val.geo.city)
+              div(class="item_row")
+                label='Country'
+                input(type="text" class="fieldItem1" id="companyCountry" value=val.geo.city)
+              div(class="item_row")
+                label='Latitude'
+                input(type="text" class="fieldItem1" id="companyLat" value=(val.geo && val.geo.ll) ? val.geo.ll[0] : '')
+              div(class="item_row")
+                label='Longitude'
+                input(type="text" class="fieldItem1" id="companyLon" value=(val.geo && val.geo.ll) ? val.geo.ll[1] : '')
           div(class="tabContent")
             h2='Appointment Configuration'
             div

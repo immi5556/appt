@@ -79,6 +79,15 @@
             }
             return num;
         }
+
+        this.editScheduleData = function(data){
+            var $bar = $("." + data.uniqueid);
+            $bar.find(".time").text(data.barData.stext+"-"+data.barData.etext);
+            if(data["text"]){
+                $bar.find(".text").text(data["text"]);
+            }
+        }
+
         // スケジュール追加
         this.addScheduleData = function(data){
             var st = Math.ceil((data["start"] - tableStartTime) / setting.widthTime);
@@ -87,6 +96,18 @@
             var stext = element.formatTime(data["start"]);
             var etext = element.formatTime(data["end"]);
             var snum = element.getScheduleCount(data["timeline"]);
+            data.uniqueid = 'ss-' + Math.random().toString(36).slice(2);
+            data.barData = {
+                st: Math.ceil((data["start"] - tableStartTime) / setting.widthTime),
+                et: Math.floor((data["end"] - tableStartTime) / setting.widthTime),
+                stext: element.formatTime(data["start"]),
+                etext: element.formatTime(data["end"]),
+                snum: element.getScheduleCount(data["timeline"]),
+                left : (st * setting.widthTimeX),
+                top : ((snum * setting.timeLineY) + setting.timeLinePaddingTop),
+                width : ((et - st) * setting.widthTimeX),
+                height : (setting.timeLineY)
+            }
             $bar.css({
                 left : (st * setting.widthTimeX),
                 top : ((snum * setting.timeLineY) + setting.timeLinePaddingTop),
@@ -100,6 +121,7 @@
             if(data["class"]){
                 $bar.addClass(data["class"]);
             }
+            $bar.addClass(data.uniqueid);
             //$element.find('.sc_main').append($bar);
             $element.find('.sc_main .timeline').eq(data["timeline"]).append($bar);
             // データの追加
@@ -107,6 +129,7 @@
             // key
             var key = scheduleData.length - 1;
             $bar.data("sc_key",key);
+            $bar.data("sc_data",data);
 
             $bar.bind("mouseup, dblclick",function(){
                 // コールバックがセットされていたら呼出
@@ -122,6 +145,7 @@
                         var node = jQuery(this);
                         var sc_key = node.data("sc_key");
                         setting.dblclick(node, scheduleData[sc_key]);
+                        //setting.dblclick(node, node.data("sc_data"));
                     }
                 }
             });

@@ -26,8 +26,21 @@ $(function(){
 		websiteData.businessType = $("#businessType").val();
 		websiteData.mobile = $("#mobile").val();
 		websiteData.companyEmail = $("#companyEmail").val();
+		websiteData.companyCity = $("#companyCity").val();
 		websiteData.details = $("#details").val();
 	};
+
+	var getGeoData = function(){
+		websiteData.geo = {};
+		websiteData.geo.metro = $("#_idmetro").val();
+		websiteData.geo.region = $("#_idregion").val();
+		websiteData.geo.city = $("#companyCity").val();
+		websiteData.geo.country = $("#companyCountry").val();
+		websiteData.geo.ll = [
+			$("#companyLat").val(),
+			$("#companyLon").val()
+		]
+	}
 
 	var getAppointConfigData = function(){
 			websiteData.concurrentCount = $("#concurrentCount").val();
@@ -72,6 +85,7 @@ $(function(){
 		getAccountData();
 		getDisplayData();
 		getCompanyData();
+		getGeoData();
 		getAppointConfigData();
 		getSpecialityOptions();
 

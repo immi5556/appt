@@ -1,17 +1,28 @@
 jQuery(document).ready(function(){
 
-    var selectedDate = moment(new Date()), tline, $sc;
-    var openModal = function(data){
+    var selectedDate = moment(new Date()), tline, $sc, selectedAppt;
+    var openModal = function(date, idx, predata){
+        $("#sHead").text(optdata.rows[idx].title);
+        if (date){
+            $("#startTime").val(date);
+            $("#endTime").val($sc.formatTime($sc.calcStringTime(date) + 1800));
+        }
+        $("#apName").val("");
+        $("#apEmail").val("");
+        $("#apMobile").val("");
+        $("#apDet").val("");
+        $("#ress-avail").html("");
+        $("#ress-headd").css("display", "none");
         $('.pop_up').fadeIn();
         $('.shadow').fadeIn();
     }
 
     $('.slider li').on('click',function(e) {
-        var scdat = optdata.rows[$(this).find(".spl_title").data("que-idx")];
-        $("#sHead").text(scdat.title);
-        $("#ress-avail").html("");
-        $("#ress-headd").css("display", "none");
-        (scdat.resources || []).forEach(function(item, idx){
+        //var scdat = optdata.rows[$(this).find(".spl_title").data("que-idx")];
+        //$("#sHead").text(scdat.title);
+        //$("#ress-avail").html("");
+        //$("#ress-headd").css("display", "none");
+        /*(scdat.resources || []).forEach(function(item, idx){
             $("#ress-headd").css("display", "block");
             var htm = '<li> \
                     <figure><img class="img-res" src="/static/images/doctor-1.png"></figure> \
@@ -21,9 +32,10 @@ jQuery(document).ready(function(){
             $htm.find("#head-res").text(item.title);
             $htm.find(".img-res").attr("src", (item.url || "/static/images/doctor-1.png"));
             $("#ress-avail").append($htm);
-        });
-        $('.pop_up').fadeIn();
-        $('.shadow').fadeIn();
+        });*/
+        //$('.pop_up').fadeIn();
+        //$('.shadow').fadeIn();
+        openModal(undefined, $(this).find(".spl_title").data("que-idx"));
     });
 
     var optdata = {
@@ -47,15 +59,18 @@ jQuery(document).ready(function(){
             console.log("click event");
         },
         dblclick: function(node,data){
+            selectedAppt = data;
             console.log("dbl click event");
-            openModal(data);
             $("#startTime").val($sc.formatTime(data.start));
             $("#endTime").val($sc.formatTime(data.end));
             $("#txtDeta").val(data.text);
             if (data.data){
                 $("#apName").val(data.data.name);
                 $("#apEmail").val(data.data.email);
-                $("#apMob").val(data.data.mobile);
+                $("#apMobile").val(data.data.mobile);
+                $("#apDet").val(data.data.details);
+                $('.pop_up').fadeIn();
+                $('.shadow').fadeIn();
             }
         },
         append: function(node,data){
@@ -63,13 +78,8 @@ jQuery(document).ready(function(){
         },
         time_click: function(time,data){
             console.log("time click event");
-            tline = $(time).data("timeline");
-            $("#sHead").text(optdata.rows[tline].title);
-            $("#endTime").val($sc.formatTime($sc.calcStringTime(data) + 1800));
-            $("#startTime").val(data);
-            $("#ress-avail").html("");
-            $("#ress-headd").css("display", "none");
-            (optdata.rows[tline].resources || []).forEach(function(item, idx){
+            
+            /*(optdata.rows[tline].resources || []).forEach(function(item, idx){
                 $("#ress-headd").css("display", "block");
                 var htm = '<li> \
                         <figure><img class="img-res" src="/static/images/doctor-1.png"></figure> \
@@ -79,8 +89,10 @@ jQuery(document).ready(function(){
                 $htm.find("#head-res").text(item.title);
                 $htm.find(".img-res").attr("src", (item.url || "/static/images/doctor-1.png"));
                 $("#ress-avail").append($htm);
-            });
-            openModal($("#selectDate").val());
+            });*/
+            tline = $(time).data("timeline");
+            selectedAppt = undefined;
+            openModal(data, tline);
         },
         time_dblclick: function(time,data){
             console.log("time dblclick event");
@@ -123,20 +135,56 @@ jQuery(document).ready(function(){
         }
         var s = $sc.calcStringTime($("#startTime").val());
         var e = $sc.calcStringTime($("#endTime").val());
-        var data = {};
-        data["timeline"] = tline;
-        data["start"] = s;
-        data["end"] = e;
-        data["text"] = "text ---";
-        data["data"] = {};
-        data.data.name = "";
-        data.data.email = "";
-        data.data.nobile = "";
-        data.data.details = "";
-        data.data.resources = "";
-        $sc.addScheduleData(data);
+        
+        if (selectedAppt){
+            var data = {};
+            selectedAppt["timeline"] = tline;
+            selectedAppt["start"] = s;
+            selectedAppt["end"] = e;
+            selectedAppt["text"] = $("#apDet").val();
+            selectedAppt["data"] = {};
+            selectedAppt.data.name = $("#apName").val();
+            selectedAppt.data.email = $("#apEmail").val();
+            selectedAppt.data.mobile = $("#apMobile").val();
+            selectedAppt.data.details = $("#apDet").val();
+            selectedAppt.data.resources = "";
+            $sc.editScheduleData(selectedAppt)
+        }
+        else{
+            var data = {};
+            data["timeline"] = tline;
+            data["start"] = s;
+            data["end"] = e;
+            data["text"] = $("#apDet").val();
+            data["data"] = {};
+            data.data.name = $("#apName").val();
+            data.data.email = $("#apEmail").val();
+            data.data.mobile = $("#apMobile").val();
+            data.data.details = $("#apDet").val();
+            data.data.resources = "";
+            $sc.addScheduleData(data);
+        }
         $sc.resetBarPosition(tline);
         $('.close_btn').trigger("click"); 
+        $("." + data.uniqueid).css("background-color", "green")
+    });
+
+    $(document).on("mouseover", ".sc_Bar", function(){
+        var bd = $(this);
+        var dt = bd.data("sc_data");
+        bd.animate( { 
+            "width": (dt.barData.width + 100) + 'px',
+            "height": (dt.barData.height + 50) + 'px',
+        });
+    });
+
+    $(document).on("mouseleave", ".sc_Bar", function(){
+        var bd = $(this);
+        var dt = bd.data("sc_data");
+        bd.stop( true, true ).animate( { 
+            "width": dt.barData.width,
+            "height": dt.barData.height
+        });
     });
 
     var ajaxCall = function(action, data, method){
@@ -158,33 +206,27 @@ jQuery(document).ready(function(){
             if (action == "getresources"){
                     var schData = [
                     ];
-                        //{
-                        //    title : 'Ortho',
-                        //    resources:[],
-                        //    schedule:[
-                        //    ]
-                        //}
-                        (result.specialities || []).forEach(function(item, idx){
-                            var tt = {
-                                title: item.name,
-                                mins: item.mins,
-                                url: item.icon,
-                                resources: []
-                            };
-                            (item.resources || []).forEach(function(item1, idx1){
-                                tt.resources.push({
-                                    title: item1.name,
-                                    mins: item1.mins,
-                                    url: item1.icon
-                                });
+                    (result.specialities || []).forEach(function(item, idx){
+                        var tt = {
+                            title: item.name,
+                            mins: item.mins,
+                            url: item.icon,
+                            resources: []
+                        };
+                        (item.resources || []).forEach(function(item1, idx1){
+                            tt.resources.push({
+                                title: item1.name,
+                                mins: item1.mins,
+                                url: item1.icon
                             });
-                            schData.push(tt);
                         });
-                        optdata.rows = schData;
-                        optdata.startTime = (result.startHour || optdata.startTime);
-                        optdata.endTime = (result.endHour || optdata.endTime);
-                        optdata.overlap = result.overlap;
-                        optdata.overlapCount = result.concurrentCount;
+                        schData.push(tt);
+                    });
+                    optdata.rows = schData;
+                    optdata.startTime = (result.startHour || optdata.startTime);
+                    optdata.endTime = (result.endHour || optdata.endTime);
+                    optdata.overlap = result.overlap;
+                    optdata.overlapCount = result.concurrentCount;
                 $sc = jQuery("#schedule").timeSchedule(optdata)
             }
         });
