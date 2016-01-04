@@ -62,10 +62,13 @@ html
               td='Business Type:'
               td
                 select(id="bstType" name="bstType")
+                  option(value="select")='Choose'
                   option(value="hospital")='Hospital'
+                  option(value="dentistry")='Dentistry'
                   option(value="training")='Training'
                   option(value="lawfirm")='Law Firm'
                   option(value="doctors")='Doctors'
+                  option(value="garage")='Garage'
                   option(value="other")='Other'
                 br
                 input(type="text" id="busTypeOther" name="busTypeOther" style="display:none;" value=val.client.busTypeOther)

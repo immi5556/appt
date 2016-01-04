@@ -2,42 +2,14 @@ To dos:
 1. Lunch break inclusion
 2. partial working days for a particular day
 3. allow partial working hours for particular resource.
-3. Unique user identified based on Mac for mobile & from browser wtih IP (60% accuracy) [Trying to do without registration]
+4. Unique user identified based on Mac for mobile & from browser wtih IP (60% accuracy) [Trying to do without registration] aalso user login and location
+5. Include nearest cities logic based on lat long..
+6. include socket.io to update calendar live
+7. inlcude voice data as part of booking, either soundcloud or inhouse repos.
 
 
-{
-    start:'09:00',
-    end:'12:00',
-    text:'Text Area',
-    data:{
-    }
-},
-{
-    start:'15:00',
-    end:'16:00',
-    text:'Text Area',
-    data:{
-    }
-},
-{
-    start:'11:00',
-    end:'14:00',
-    text:'Text Area',
-    data:{
-    }
-},
-{
-    start:'14:00',
-    end:'15:00',
-    text:'Text Area',
-    data:{
-    }
-}
+Known issues:
 
-{
-   start:'16:00',
-   end:'17:00',
-   text:'Text Area',
-   data:{
-   }
-}
+1. timeline is index based, will create probelm in registration setting edit [Have to make it text or item based]
+
+2. revalidate utc to local time conversion.. with clear mind..

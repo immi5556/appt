@@ -3,17 +3,17 @@ var MongoClient = mongo.MongoClient;
 var objectId = mongo.ObjectId;
 var wrapper = function () {
 	var dbaudit, dbland, dbclient, dbsched;
-	MongoClient.connect("mongodb://localhost:27017/Audit", function(err, db) {
+	MongoClient.connect("mongodb://localhost:27017/Audit", {server: {poolSize: 1}}, function(err, db) {
 	  if(err) { return console.dir(err); }
 	  dbaudit = db;
 	});
 
-	MongoClient.connect("mongodb://localhost:27017/Clients", function(err, db) {
+	MongoClient.connect("mongodb://localhost:27017/Clients", {server: {poolSize: 1}}, function(err, db) {
 	  if(err) { return console.dir(err); }
 	  dbclient = db;
 	});
 
-	MongoClient.connect("mongodb://localhost:27017/Schedule", function(err, db) {
+	MongoClient.connect("mongodb://localhost:27017/Schedule", {server: {poolSize: 1}}, function(err, db) {
 	  if(err) { return console.dir(err); }
 	  dbsched = db;
 	});
@@ -37,6 +37,25 @@ var wrapper = function () {
 		});
 	}
 
+	var GetAppts = function(data, callback){
+		dbsched.collection(data.subdomain).find({ 'selecteddate' : data.selecteddate } ).toArray(function(err, docs) {	
+			if (err) console.dir(err);
+			console.log(docs);
+			callback(undefined, docs);
+		});
+	}
+
+	var GetCounts = function(data, callback){
+		dbsched.collection(data.subdomain).aggregate([
+				{ $match: {"selecteddate": { $gte: data.selecteddate } } },
+				{ $group: {"_id": "$selecteddate", "count": { $sum: 1 } } }
+			]).toArray(function(err, docs) {	
+			if (err) console.dir(err);
+			console.log(docs);
+			callback(undefined, docs);
+		});
+	}
+
 	var InsertSchedule = function(data){
 		var collection = dbsched.collection(data.subdomain);
 		data.createdat = Date.now();
@@ -46,7 +65,9 @@ var wrapper = function () {
 	return {
 		logSchedule: LogSchedule,
 		getDetails: GetDetails,
-		insertSchedule: InsertSchedule
+		insertSchedule: InsertSchedule,
+		getAppts: GetAppts,
+		getCounts: GetCounts
 	}
 }
 

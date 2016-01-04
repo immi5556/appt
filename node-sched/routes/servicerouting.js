@@ -7,6 +7,22 @@ module.exports = function(opts){
 		opts.daler.insertSchedule(obj);
 	    res.send(req.body);
 	}
+	if (req.params.action == 'update') {
+	    opts.daler.logSchedule(obj);
+	    res.send(req.body);
+	}
+	if (req.params.action == 'getappts') {
+	    opts.daler.logSchedule(obj);
+	    opts.daler.getAppts(obj, function(err, data){
+	    	res.send(data);
+	    });
+	}
+	if (req.params.action == 'getcounts') {
+	    opts.daler.logSchedule(obj);
+	    opts.daler.getCounts(obj, function(err, data){
+	    	res.send(data);
+	    });
+	}
 	if (req.params.action == 'getresources') {
 		console.log(obj.subdomain);
 	 	opts.daler.getDetails(obj.subdomain, function(err, data) {

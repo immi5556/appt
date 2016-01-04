@@ -65,10 +65,13 @@ html
               div(class="item_row")
                 Label='Business Type'
                 select(class="fieldItem1" id="businessType")
+                  option(value="Select" selected=('Select'== (val.businessType || 'Select')))='Choose'
                   option(value="Hospital" selected=('Hospital'== val.businessType))='Hospital'
+                  option(value="Dentistry" selected=('Dentistry'== val.businessType))='Dentistry'
                   option(value="Training" selected=('Training'== val.businessType))='Training'
                   option(value="Law Firm" selected=('Law Firm'== val.businessType))='Law Firm'
                   option(value="Doctors" selected=('Doctors'== val.businessType))='Doctors'
+                  option(value="Garage" selected=('Garage'== val.businessType))='Garage'
                   option(value="Other" selected=('Other'== val.businessType))='Other'
               div(class="item_row")
                 Label='Mobile'

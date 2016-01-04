@@ -8,6 +8,7 @@
     "express-session": "^1.12.1",
     "fibers": "*",
     "generate-schema": "^2.1.1",
+    "geoip-lite": "^1.1.6",
     "jade": "^1.11.0",
     "jquery-file-upload-middleware": "^0.1.7",
     "moment": "^2.10.6",

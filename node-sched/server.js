@@ -29,7 +29,10 @@ app.get("/", function(req, res){
     subDomain = domain.split('.')[0];
     console.log(req.headers);
     if (subDomain.indexOf('localhost') > -1) 
-    	subDomain = 'test2';
+    	subDomain = 'test';
+    //else if(parseInt(subDomain) > 40){
+    //	subDomain = 'test2';
+    //}
     else {
     	var ur = url.parse(req.headers.referer);
     	domain = ur.host;

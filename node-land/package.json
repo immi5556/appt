@@ -4,8 +4,10 @@
   "dependencies": {
     "body-parser": "^1.14.1",
     "connect": "^3.4.0",
+    "express": "^4.13.3",
     "express-session": "^1.12.1",
     "generate-schema": "^2.1.1",
+    "geoip-lite": "^1.1.6",
     "jade": "^1.11.0",
     "moment": "^2.10.6",
     "mongodb": "^2.0.49",

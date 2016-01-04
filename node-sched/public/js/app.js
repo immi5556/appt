@@ -1,6 +1,6 @@
 jQuery(document).ready(function(){
 
-    var selectedDate = moment(new Date()), tline, $sc, selectedAppt;
+    var selectedDate = moment(new Date()).format("YYYY-MM-DD"), tline, $sc, selectedAppt;
     var openModal = function(date, idx, predata){
         $("#sHead").text(optdata.rows[idx].title);
         if (date){
@@ -127,9 +127,6 @@ jQuery(document).ready(function(){
     });
 
     $("#aptSubmit").on("click", function(){
-        //ajaxCall("Insert");
-        //$("#txtStrtTime").val($sc.formatTime(data.start));
-        //$("#txtendtime").val($sc.formatTime(data.end));
         if (!validateOverlap()){
             return;
         }
@@ -141,32 +138,38 @@ jQuery(document).ready(function(){
             selectedAppt["timeline"] = tline;
             selectedAppt["start"] = s;
             selectedAppt["end"] = e;
+            selectedAppt["startTime"] = $("#startTime").val();
+            selectedAppt["endTime"] = $("#endTime").val();
             selectedAppt["text"] = $("#apDet").val();
             selectedAppt["data"] = {};
             selectedAppt.data.name = $("#apName").val();
             selectedAppt.data.email = $("#apEmail").val();
             selectedAppt.data.mobile = $("#apMobile").val();
             selectedAppt.data.details = $("#apDet").val();
-            selectedAppt.data.resources = "";
-            $sc.editScheduleData(selectedAppt)
+            selectedAppt.data.resources = [];
+            $sc.editScheduleData(selectedAppt);
+            ajaxCall("update", selectedAppt);
         }
         else{
             var data = {};
             data["timeline"] = tline;
             data["start"] = s;
             data["end"] = e;
+            data["startTime"] = $("#startTime").val();
+            data["endTime"] = $("#endTime").val();
             data["text"] = $("#apDet").val();
             data["data"] = {};
             data.data.name = $("#apName").val();
             data.data.email = $("#apEmail").val();
             data.data.mobile = $("#apMobile").val();
             data.data.details = $("#apDet").val();
-            data.data.resources = "";
+            data.data.resources = [];
             $sc.addScheduleData(data);
+            ajaxCall("insert", data);
         }
         $sc.resetBarPosition(tline);
         $('.close_btn').trigger("click"); 
-        $("." + data.uniqueid).css("background-color", "green")
+        $("." + data.uniqueid).css("background-color", "green");
     });
 
     $(document).on("mouseover", ".sc_Bar", function(){
@@ -187,55 +190,42 @@ jQuery(document).ready(function(){
         });
     });
 
-    var ajaxCall = function(action, data, method){
+    var ajaxCall = function(action, data, callback){
         var bb = { 
             action: action,
+            selecteddate: selectedDate,
             subdomain: $("#compTbl").text(), 
             data: data
         }
-        var request = $.ajax({
+        $.ajax({
             //url: "http://landing.que.one/endpoint/ccreate",
             url: "/endpoint/" + action,
             type: "POST",
             data: JSON.stringify(bb),
-            contentType: "application/json; charset=UTF-8"
-        });
-
-        request.success(function(result) {
-            console.log(result);
-            if (action == "getresources"){
-                    var schData = [
-                    ];
-                    (result.specialities || []).forEach(function(item, idx){
-                        var tt = {
-                            title: item.name,
-                            mins: item.mins,
-                            url: item.icon,
-                            resources: []
-                        };
-                        (item.resources || []).forEach(function(item1, idx1){
-                            tt.resources.push({
-                                title: item1.name,
-                                mins: item1.mins,
-                                url: item1.icon
-                            });
-                        });
-                        schData.push(tt);
-                    });
-                    optdata.rows = schData;
-                    optdata.startTime = (result.startHour || optdata.startTime);
-                    optdata.endTime = (result.endHour || optdata.endTime);
-                    optdata.overlap = result.overlap;
-                    optdata.overlapCount = result.concurrentCount;
-                $sc = jQuery("#schedule").timeSchedule(optdata)
+            contentType: "application/json; charset=UTF-8",
+            success: function(result) {
+                console.log(result);
+                if (callback){
+                    callback(result);
+                }
+            },
+            fail: function(jqXHR, textStatus) {
+                $("#alert-pop").text('Errored: ' + textStatus);
             }
         });
+
+        /*request.success(function(result) {
+            console.log(result);
+            if (callback){
+                callback(result);
+            }
+        }); 
         request.fail(function(jqXHR, textStatus) {
             $("#alert-pop").text('Errored: ' + textStatus);
-        });
+        }); */
     }
 
-    var populateWdayText = function () {
+    var populateWdayText = function (result) {
         var days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
         var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
         var now = new Date();
@@ -249,7 +239,14 @@ jQuery(document).ready(function(){
         for (i = 0; i < 7; i++) {
             var tdd = days[day];
             $("#apptcnt" + (i + 1)).addClass(tdd.toLowerCase()).data("selected-date", mmtdt);
-            mmtdt = moment(mmtdt).add(1, 'd')
+            $("#apptcnt" + (i + 1)).text(0);
+            result.forEach(function(item){
+                if (item._id == mmtdt){
+                    $("#apptcnt" + (i + 1)).text((item["count"] || 0));
+                    return false;
+                }
+            });
+            mmtdt = moment(mmtdt).add(1, 'd').format("YYYY-MM-DD");
             tdd = tdd + ' <br> (' + (tddt) + ' / ' + (tdm) + ')';
             $("#wday" + (i + 1)).html(tdd);
             day = day + 1;
@@ -275,9 +272,43 @@ jQuery(document).ready(function(){
             console.log("good..");
         } else {
             selectedDate = $(this).data("selected-date");
-            ajaxCall("getresources");
+            ajaxCall("getappts", {}, getApptsAck);
         }
     });
-    populateWdayText();
-    ajaxCall("getresources");
+
+    var getApptsAck = function(result){
+        $(".sc_Bar").remove();
+        (result || []).forEach(function(item) {
+            $sc.addScheduleData(item.data);
+            $sc.resetBarPosition(item.data.timeline);
+        });
+    }
+
+    var getresourcesAck = function(result){
+        var schData = [];
+        (result.specialities || []).forEach(function(item, idx){
+            var tt = {
+                title: item.name,
+                mins: item.mins,
+                url: item.icon,
+                resources: []
+            };
+            (item.resources || []).forEach(function(item1, idx1){
+                tt.resources.push({
+                    title: item1.name,
+                    mins: item1.mins,
+                    url: item1.icon
+                });
+            });
+            schData.push(tt);
+        });
+        optdata.rows = schData;
+        optdata.startTime = (result.startHour || optdata.startTime);
+        optdata.endTime = (result.endHour || optdata.endTime);
+        optdata.overlap = result.overlap;
+        optdata.overlapCount = result.concurrentCount;
+        $sc = jQuery("#schedule").timeSchedule(optdata);
+    }
+    ajaxCall("getresources", {}, getresourcesAck);
+    ajaxCall("getcounts", {}, populateWdayText);
 });
