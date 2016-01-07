@@ -6,7 +6,7 @@ var wrapper = function(){
         res.status(err.status).end();
       }
       else {
-        console.log('Sent:', (req.params.jsfile || req.params.cssfile || req.params.imgfile));
+        //console.log('Sent:', (req.params.jsfile || req.params.cssfile || req.params.imgfile));
       }
     }
   }

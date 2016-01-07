@@ -1,0 +1,72 @@
+[
+	
+	{
+		"CName":"INDIA",
+		"States":[
+			{
+				"name":"INDIA State1"	
+			},
+			{
+				"name":"INDIA State2"	
+			},
+			{
+				"name":"INDIA State3"	
+			},
+			{
+				"name":"INDIA State4"	
+			}
+		]
+	},
+	{
+		"CName":"USA",
+		"States":[
+			{
+				"name":"USA State1"	
+			},
+			{
+				"name":"USA State2"	
+			},
+			{
+				"name":"USA State3"	
+			},
+			{
+				"name":"USA State4"	
+			}
+		]
+	},
+	{
+		"CName":"CHINA",
+		"States":[
+			{
+				"name":"CHINA State1"	
+			},
+			{
+				"name":"CHINA State2"	
+			},
+			{
+				"name":"CHINA State3"	
+			},
+			{
+				"name":"CHINA State4"	
+			}
+		]
+	},
+	{
+		"CName":"SRILANKA",
+		"States":[
+			{
+				"name":"SRILANKA State1"	
+			},
+			{
+				"name":"SRILANKA State2"	
+			},
+			{
+				"name":"SRILANKA State3"	
+			},
+			{
+				"name":"SRILANKA State4"	
+			}
+		]
+	}
+
+]

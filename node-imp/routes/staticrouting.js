@@ -17,11 +17,15 @@ module.exports = function(app, daler, localSession, logger){
       res.sendFile(path.resolve('./styles/' + req.params.cssfile), staticoptions, logger.consoleLog(req, res));
   });
 
-  app.get('/content/img/:imgfile', function(req, res){
-      res.sendFile(path.resolve('./content/img/' + req.params.imgfile), staticoptions, logger.consoleLog(req, res));
+  app.get('/content/images/:imgfile', function(req, res){
+      res.sendFile(path.resolve('./content/images/' + req.params.imgfile), staticoptions, logger.consoleLog(req, res));
   });
 
   app.get('/images/sample/:imgfile', function(req, res){
       res.sendFile(path.resolve('./content/img/tiles/' + req.params.imgfile), staticoptions, logger.consoleLog(req, res));
+  });
+
+  app.get('/js/:datafile', function(req, res){
+      res.sendFile(path.resolve('./data/' + req.params.datafile), staticoptions, logger.consoleLog(req, res));
   });
 }

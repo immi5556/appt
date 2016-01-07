@@ -1,14 +1,18 @@
 html
   head
-    include ./../includes/head.jade
+    title=within 30
+    meta(charset="utf-8")
+    link(rel="stylesheet" href="/styles/MetroJs.css")
+    link(rel="stylesheet" href="/styles/style.css")
+    link(href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=latin,latin-ext,greek-ext,greek' rel='stylesheet' type='text/css')
   body
-    div(class="section group")
-      each val, idx in header.sections
-        div(class="col span_" + (idx + 1) + "_of_" + header.sections.length)
-          h2!= val.content
-    div(class="section group main-content")
-      div(class="col span_6_of_10 middler")
-         include ./../static/test/ittile.html
-      div(class="col span_4_of_10 middler")
-        h1!= 'Site Content Goes Here'
-  include ./../includes/foot.jade  
+    header
+      div.container
+        h1.logo
+          a(href="javascript:void(0)")
+            img(src="content/images/within30-logo.png" alt="logo")
+    div.content
+      div.container
+        div(class="clear clear-sec1")
+          div(class="col-lg-7")
+            div(class="select-row")
