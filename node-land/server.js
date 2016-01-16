@@ -8,6 +8,7 @@ var logger = require('./logger/logger.js').logger;
 var mailer = require('./libs/emailer.js').emailer;
 var qutils = require('./utils/utils.js').qutils;
 var service = require('./bl/servicemapper.js').service;
+var cors = require('cors');
 
 
 app.use(session({secret: 'LORDJESUSMYSAVIOUR', resave: true,
@@ -15,11 +16,14 @@ app.use(session({secret: 'LORDJESUSMYSAVIOUR', resave: true,
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-app.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-  next();
-});
+
+var whitelist = ['http://que.one', 'http://www.que.one'];
+var corsOptions = {
+  origin: function(origin, callback){
+    var originIsWhitelisted = whitelist.indexOf(origin) !== -1;
+    callback(null, originIsWhitelisted);
+  }
+};
 
 var opts = {
 	daler: daler, 
@@ -29,7 +33,9 @@ var opts = {
 	mailer: mailer,
 	qutils: qutils,
 	service: service,
-	guid: uuid
+	guid: uuid,
+	cors: cors,
+	corsOptions: corsOptions
 };
 
 require('./routes/staticrouting.js')(app, opts);

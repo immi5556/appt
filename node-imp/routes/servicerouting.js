@@ -1,4 +1,4 @@
-module.exports = function(app, daler, localSession, bodyParser, logger, countries){
+module.exports = function(app, daler, localSession, bodyParser, logger, countries, nearCity){
   app.use(bodyParser.json());
   app.post('/endpoint/:action', function(req, res){
   	var lsession = req.session;
@@ -34,5 +34,12 @@ module.exports = function(app, daler, localSession, bodyParser, logger, countrie
   			res.send(data);
   		});
   	}
+    if (req.params.action == 'getNearestCities'){
+      data = nearCity(req.body.lat || 48.8567, req.body.long || 2.3508, 30);
+      var lst = (data || []).filter(function(item){
+        return item.distance <= req.body.dist;
+      });
+      res.send(lst);
+    }
   });
 }

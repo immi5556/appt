@@ -183,7 +183,7 @@
             html += '<div class="timeline"></div>';
             var $timeline = jQuery(html);
             for(var t=tableStartTime;t<tableEndTime;t+=setting.widthTime){
-                var $tl = jQuery('<div class="tl"></div>');
+                var $tl = jQuery('<div class="tl btn-pop" data-id="#pop-up"></div>');
                 $tl.width(setting.widthTimeX - setting.timeBorder);
 
                 $tl.data("time",element.formatTime(t));

@@ -1,0 +1,29 @@
+html
+  head
+    script(src='/scripts/jquery-1.11.3.min.js')
+    script(src='/scripts/custombox.min.js')
+  body  
+    div(class="section group")
+      h2!= 'Admin Page'
+      table
+        th= 'displayname'
+        th='nickname'
+        th='fishidx'
+        th='socketid'
+        th='Action'
+          each vl, idx in val
+            tr
+              td=vl.displayname
+              td=vl.nickname
+              td=vl.fishidx
+              td=vl.socketid
+              td
+                a(href='javascript:void(0)')='Remove' 
+    //    div(class="col span_" + (idx + 1) + "_of_" + header.sections.length)
+    //      h2!= val.content
+    //div(class="section group main-content")
+    //  div(class="col span_6_of_10 middler")
+    //     include ./../static/test/ittile.html
+    //  div(class="col span_4_of_10 middler")
+    //    h1!= 'Site Content Goes Here'
+  //include ./../includes/foot.jade  

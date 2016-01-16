@@ -17,26 +17,30 @@
 			<div class="container">
 			<div class="clear clear-sec1">
 				<div class="col-lg-7">
-				<div class="select-row">
-					<div class="col-lg-6">
-						<div class="selectbx">
-							<div class="text-label" id="countryText">Country</div>
-							<ul class="select-drop" id="countryList">
-								
-							</ul>
+					<div class="select-row">
+						<div class="col-lg-6">
+							<div class="selectbx">
+								<div class="text-label" id="countryText">Country</div>
+								<ul class="select-drop" id="countryList">
+									
+								</ul>
+							</div>
+						</div>
+						<div class="col-lg-6">
+							<div class="selectbx">
+								<div class="text-label" id="city-text">Cities</div>
+								<ul class="select-drop" id="cityList">
+									
+								</ul>
+							</div>
+						</div>
+						<div class="page-caption">
+							<h3><span class="country-tlt">Country</span> : <span class="city-tlt">City</span></h3>
 						</div>
 					</div>
-					<div class="col-lg-6">
-						<div class="selectbx">
-							<div class="text-label" id="city-text">Cities</div>
-							<ul class="select-drop" id="cityList">
-								
-							</ul>
-						</div>
-					</div>
-					<div class="page-caption">
-						<h3><span class="country-tlt">Country</span> : <span class="city-tlt">City</span></h3>
-					</div>
+					<div class="col-lg-6" style="text-align:center;">
+						<input id="rngsel" type="range"  min="0" max="50" />
+						<span id="range">0</span>
 					</div>
 				</div>
 				<div class="col-lg-5">
@@ -61,6 +65,8 @@
 				<div class="sec-carousel">
 					<span class="next"><img src="content/images/next-arrow.png"></span>
 					<span class="prev"><img src="content/images/prev-arrow.png"></span>
+					<div class="near-citi">
+					</div>
 					<ul class="slider">
 						
 					</ul>
@@ -117,6 +123,7 @@
 		<div class="pageShadow"></div>
 		<span class="close-arrow">x</span>
 		<script src="scripts/jquery-1.11.3.min.js"></script>
+		<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
 		<script src="scripts/MetroJs.js"></script>
 		<script src="scripts/gbcarousel.js"></script>		
 		<script src="scripts/custom.js"></script>

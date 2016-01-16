@@ -1,0 +1,23 @@
+{
+  "name": "Vaporize-App",
+  "version": "1.0.0",
+  "description": "Vaporize Chat",
+  "keywords": [
+    "Node.js",
+    "Vaporize",
+    "chat",
+    "socket.io"
+  ],
+  "author": {
+    "name": "Immanuel",
+    "email": "raj@immanuel.co",
+    "url": "http://www.immanuel.co/"
+  },
+  "homepage": "http://www.immanuel.co/",
+  "dependencies": {
+    "express": "^4.13.3",
+    "jade": "^1.11.0",
+    "serve-favicon": "^2.3.0",
+    "socket.io": "^1.4.2"
+  }
+}

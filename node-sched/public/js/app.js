@@ -13,8 +13,8 @@ jQuery(document).ready(function(){
         $("#apDet").val("");
         $("#ress-avail").html("");
         $("#ress-headd").css("display", "none");
-        $('.pop_up').fadeIn();
-        $('.shadow').fadeIn();
+        //$('.pop_up').fadeIn();
+        //$('.shadow').fadeIn();
     }
 
     $('.slider li').on('click',function(e) {
@@ -69,16 +69,20 @@ jQuery(document).ready(function(){
                 $("#apEmail").val(data.data.email);
                 $("#apMobile").val(data.data.mobile);
                 $("#apDet").val(data.data.details);
-                $('.pop_up').fadeIn();
-                $('.shadow').fadeIn();
             }
+            $('.pop_up').fadeIn();
+            $('.shadow').fadeIn();
+            //tline = $(node).data("timeline");
+            //selectedAppt = undefined;
+            //openModal(data, tline);
+            //$('body').gblightbx();
         },
         append: function(node,data){
             console.log("append event.");
         },
         time_click: function(time,data){
             console.log("time click event");
-            
+            $('body').gblightbx();
             /*(optdata.rows[tline].resources || []).forEach(function(item, idx){
                 $("#ress-headd").css("display", "block");
                 var htm = '<li> \
@@ -238,11 +242,13 @@ jQuery(document).ready(function(){
         var mmtdt = selectedDate;
         for (i = 0; i < 7; i++) {
             var tdd = days[day];
-            $("#apptcnt" + (i + 1)).addClass(tdd.toLowerCase()).data("selected-date", mmtdt);
-            $("#apptcnt" + (i + 1)).text(0);
+            //$("#apptcnt" + (i + 1)).addClass(tdd.toLowerCase()).data("selected-date", mmtdt).data("selected-day", tdd).data("date-format", moment(mmtdt).add(1, 'd').format("YYYY-MM-DD"));
+            $("#apptcnt" + (i + 1)).attr("class", "num-1 progress-radial " +  tdd.toLowerCase() + " progress-0").data("selected-date", mmtdt).data("selected-day", tdd).data("date-format", moment(mmtdt).add(1, 'd').format("YYYY-MM-DD"));
+            $("#apptcnt" + (i + 1)).find(".overlay").text("0");
             result.forEach(function(item){
                 if (item._id == mmtdt){
-                    $("#apptcnt" + (i + 1)).text((item["count"] || 0));
+                    $("#apptcnt" + (i + 1)).removeClass("progress-0").addClass("progress-" + (item["count"] || 0));
+                    $("#apptcnt" + (i + 1)).find(".overlay").text((item["count"] || 0));
                     return false;
                 }
             });
@@ -263,11 +269,12 @@ jQuery(document).ready(function(){
                 }
             }
         }
-
+        ajaxCall("getappts", {}, getApptsAck);
     };
 
-    $(".num").on("click", function(){
+    $(document).on("click", ".num-1", function(){
         console.log($(this).data("selected-date"));
+        $("#selDispl").text($(this).data("selected-day") + ' (' + $(this).data("date-format") + ')');
         if (selectedDate == $(this).data("selected-date")){
             console.log("good..");
         } else {

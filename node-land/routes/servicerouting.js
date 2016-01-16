@@ -1,5 +1,6 @@
 module.exports = function(app, opts){
-	  app.post('/endpoint/:action', function(req, res){
+	  app.options('*', opts.cors());
+	  app.post('/endpoint/:action', opts.cors(opts.corsOptions), function(req, res){
 	  	//opts.logger.log('reached...');
 	  	//opts.logger.log(req.params.action);
 	  	//opts.logger.log(req.headers);

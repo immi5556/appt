@@ -4,6 +4,7 @@
   "dependencies": {
     "body-parser": "^1.14.1",
     "connect": "^3.4.0",
+    "cors": "^2.7.1",
     "express": "^4.13.3",
     "express-session": "^1.12.1",
     "generate-schema": "^2.1.1",

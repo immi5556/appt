@@ -28,6 +28,7 @@ module.exports = function(app, daler, localSession, logger){
   		localSession.city = geo.city || 'Nil';
       localSession.country = translateIsoCode(geo.country) || 'Nil';
       localSession.isocode = geo.country;
+      localSession.ll = geo.ll;
   		daler.logTrace(geo);
   	}
     console.log("The IP is %s, city : %s", localSession.ip,(localSession.city || 'Nil'));

@@ -11,7 +11,6 @@ html(xmlns="http://www.w3.org/1999/xhtml")
     div(style="display:none")
       span(id="compTbl")=val.subdomain
     div(id="header")
-      //h2!= val.ClientName + ' [' + val.email + ']'
       header
         div(class="container")
           div(class="logo")
@@ -53,29 +52,39 @@ html(xmlns="http://www.w3.org/1999/xhtml")
           div.container
             h2.heading
               |Schedule
+            h3.dayheading
+              span#selDispl
+                    |( Monday )   
             div.weekDetails
               ul
                 li
                   strong#wday1
-                  span(class="num" id="apptcnt1")
+                  div(class="progress-radial progress-25" id="apptcnt1")
+                    div(class="overlay")="10%"
                 li
                   strong#wday2
-                  span(class="num" id="apptcnt2")
+                  div(class="progress-radial progress-50" id="apptcnt2")
+                    div(class="overlay")="20%"
                 li
                   strong#wday3
-                  span(class="num" id="apptcnt3")
+                  div(class="progress-radial progress-75" id="apptcnt3")
+                    div(class="overlay")="30%"
                 li
                   strong#wday4
-                  span(class="num" id="apptcnt4")
+                  div(class="progress-radial progress-85" id="apptcnt4")
+                    div(class="overlay")="40%"
                 li
                   strong#wday5
-                  span(class="num" id="apptcnt5")
+                  div(class="progress-radial progress-95" id="apptcnt5")
+                    div(class="overlay")="50%"
                 li
                   strong#wday6
-                  span(class="num" id="apptcnt6")
+                  div(class="progress-radial progress-100" id="apptcnt6")
+                    div(class="overlay")="60%"
                 li
                   strong#wday7
-                  span(class="num mon" id="apptcnt7")
+                  div(class="progress-radial progress-37" id="apptcnt7")
+                    div(class="overlay")="70%"
   include ./../static/book.html
   script(src='/static/js/jquery-1.11.3.min.js')
   script(src='/static/js/jquery-ui.min.js')
@@ -84,5 +93,7 @@ html(xmlns="http://www.w3.org/1999/xhtml")
   script(src='/static/js/moment.js')
   script(src='/static/js/custombox.min.js')
   script(src='/static/js/jquery-clockpicker.min.js')
-  script(src='/static/js/custom.js')
+  script(src='/static/js/gb-lightbx.js')
+  script(src='/static/js/gb-carousel.js')
   script(src='/static/js/app.js')
+  script(src='/static/js/custom.js')

@@ -1,5 +1,5 @@
 $(function(){
-	$('.pop_up').hide();
+	/*$('.pop_up').hide();
 	$('.shadow').hide();
 	
 	
@@ -7,6 +7,9 @@ $(function(){
 		$('.pop_up').fadeOut();
 		$('.shadow').fadeOut();
 	})	
-	
+	*/
+	$('body').gblightbx();
+	$('#schedule').wrap('<div class="wrapper"></div>');
+	$('.carousel').gbcarousel({});
 	
 });
