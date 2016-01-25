@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Holla Test</title>
+    <script src="http://code.jquery.com/jquery.min.js"></script>
+    <script src="holla.js"></script>
+    <link rel="stylesheet" href="effects.css">
+    <style>
+      body {
+        height: 100%;
+        width: 100%;
+        background-color: #333;
+      }
+
+      .them {
+        width: 100%;
+        max-width: 100%;
+        max-height: 100%;
+        height: auto;
+      }
+      
+      .video-container {
+        position: relative;
+        overflow: hidden;
+        height: 100%;
+        width: 100%;
+        max-width: 100%;
+        max-height: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <input id="whoAmI" type="text" placeholder="Who are you?"></input>
+    <input id="whoCall" type="text" placeholder="Who do you want to call?"></input>
+    <button id="hangup">Hangup</button>
+    <br/>
+    <div class="video-container">
+      <video class="them" autoplay="true"></video>
+      <video class="me rtc-pip" autoplay="true" muted="true"></video>
+    </div>
+  </body>
+      <script>
+		
+		$(function(){
+			var server = holla.createClient({debug:true});
+		  $("#me").hide();
+		  $("#them").hide();
+		  $("#whoCall").hide();
+		  $("#hangup").hide();
+
+		  server.on("presence", function(user){
+		    if (user.online) {
+		      console.log(user.name + " is online.");
+		    } else {
+		      console.log(user.name + " is offline.");
+		    }
+		  });
+
+		  $("#whoAmI").change(function(){
+		    var name = $("#whoAmI").val();
+		    $(".me").show();
+		    $(".them").show();
+		    $("#whoAmI").remove();
+		    $("#whoCall").show();
+		    $("#hangup").show();
+
+		    holla.createFullStream(function(err, stream) {
+		      if (err) throw err;
+		      holla.pipe(stream, $(".me"));
+
+		      // accept inbound
+		      server.register(name, function(worked) {
+		        server.on("call", function(call) {
+		          console.log("Inbound call", call);
+
+		          call.addStream(stream);
+		          call.answer();
+
+		          call.ready(function(stream) {
+		            holla.pipe(stream, $(".them"));
+		          });
+		          call.on("hangup", function() {
+		            $(".them").attr('src', '');
+		          });
+		          $("#hangup").click(function(){
+		            call.end();
+		          });
+		        });
+
+		        //place outbound
+		        $("#whoCall").change(function(){
+		          var toCall = $("#whoCall").val();
+		          var call = server.call(toCall);
+		          call.addStream(stream);
+		          call.ready(function(stream) {
+		            holla.pipe(stream, $(".them"));
+		          });
+		          call.on("hangup", function() {
+		            $(".them").attr('src', '');
+		          });
+		          $("#hangup").click(function(){
+		            call.end();
+		          });
+		        });
+
+		      });
+		    });
+
+		  });
+		});
+    </script>
+</html>

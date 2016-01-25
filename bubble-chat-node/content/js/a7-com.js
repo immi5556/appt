@@ -12,6 +12,7 @@ var a7com = (function(){
 		pageObject.removeUser(data);
 	});
 	socket.on("allfishes", function(data){
+		pageObject.clearPool();
 		for(fi in data){
 			pageObject.addUser(data[fi]);
 		}

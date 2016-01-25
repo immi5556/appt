@@ -263,6 +263,8 @@ footer {
 	border-radius: 7px;
 	border: 1px solid #d1d1d1;
 	background: #ffffff;
+	overflow-y: scroll;
+    max-height: 130px;
 }
 .select-drop li {
 	list-style: none;
@@ -273,6 +275,10 @@ footer {
 	font-size: 14px;
 	padding: 0 10px;
 	cursor: pointer;
+	overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    padding: 0 5px 0 10px;
 }
 .select-drop li:hover,.select-drop li:focus,.select-drop li:active {
 	border: 1px solid #aee4e4;

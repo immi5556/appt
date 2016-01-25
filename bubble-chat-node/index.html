@@ -212,7 +212,7 @@
 		<div id="container">
 			<div id="header" style="position:relative;">
 				<h2>BUBBLE CHAT</h2>
-				<div id="idnickName" contenteditable="true" style="position:absolute;top:10;right:5;color:white;">Nickname</div>
+				<div id="idnickName" contenteditable="true" style="position:absolute;top:10;right:25;color:white;">Nickname</div>
 			</div>
 			<div id="chat-menu">
 				
@@ -414,6 +414,10 @@
 			return ovrlap;
 		}
 		
+		var clearPool = function(){
+			$(".pool").find(".users").remove();
+		}
+
 		var addUser = function(nuser){
 			var $div = $("<div class='users " + nuser.nickname + "' style='left:" + randoms(sizes.pool.lmin, sizes.pool.lmax) + ";top:" +  randoms(sizes.pool.tmin, sizes.pool.tmax) + ";overflow:visible;'><img class='img-users' src='static/img/fish_" + nuser.fishidx + ".png'><br /><b style='color:white;margin-left:-5px;'>" + nuser.nickname + "</b></div>");
 			$div.data("fish-info", nuser);
@@ -439,8 +443,9 @@
 			$("#idnickName").addClass(me.nickname);
 			$("#idnickName").data("iteme", me);
 			$("#idnickName").on("blur", function(){
-				if (me.displayname !== $(this).text()){
+				if (me.displayname !== $(this).text()) {
 					me.displayname = $(this).text();
+					$(this).text(me.displayname + '   ');
 					a7com.changeDisplayname(me);
 				}
 			});
@@ -579,7 +584,8 @@
 			startConverse: startConverse,
 			overlaps: overlaps,
 			populateMe: populateMe,
-			changeDisplay: changeDisplay
+			changeDisplay: changeDisplay,
+			clearPool: clearPool
 		}
 	})();
 	</script>

@@ -45,7 +45,7 @@ io.on('connection', function (socket) {
 		fishidx: randoms(1, 16),
 		socketid: socket.id
 	}
-	newfish.displayname = newfish.nickname;
+	newfish.displayname = newfish.nickname + '   ';
 	io.to(socket.id).emit("allfishes", fishes);
 	io.to(socket.id).emit("itsu", newfish);
 

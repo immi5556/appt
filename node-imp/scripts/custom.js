@@ -66,12 +66,14 @@ $(function(){
 
 	var loadCity = function(cdat){
 		console.log(cdat);
-		$(".near-citi").html("");
-		$("#range").val(0);
 		cdat.cities.forEach(function(item){
     		var ll = $("<li />").addClass(item.replace(/ /g, '-')).text(item);
     		$('#cityList').append(ll);
     		ll.on("click", function(){
+    			$(".near-citi").html("");
+				$("#rngsel").val(0);
+				$("#range").text(0);
+
     			$(this).closest('.selectbx').find(labelDATA).text($(this).text());
     			$('.city-tlt').text($('#city-text').text());
     			var geocoder =  new google.maps.Geocoder();
@@ -99,6 +101,10 @@ $(function(){
     		var ll = $("<li />").addClass(item.replace(/ /g, '-')).text(item);
     		$('#countryList').append(ll);
     		ll.on("click", function(){
+				$(".near-citi").html("");
+				$("#rngsel").val(0);
+				$("#range").text(0);
+
     			$(this).closest('.selectbx').find(labelDATA).text($(this).text());
     			$('.country-tlt').text($('#countryText').text());
     			$('#cityList').html('');
