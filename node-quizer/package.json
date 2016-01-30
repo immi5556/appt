@@ -1,0 +1,17 @@
+{
+  "name": "node-quizer",
+  "version": "0.0.1",
+  "dependencies": {
+    "body-parser": "^1.14.2",
+    "cors": "^2.7.1",
+    "express": "^4.13.4",
+    "express-session": "^1.13.0",
+    "geoip-lite": "^1.1.6",
+    "moment": "^2.11.1",
+    "mongodb": "^2.1.4",
+    "node-uuid": "^1.4.7",
+    "nodemailer": "^2.0.0",
+    "nodemailer-smtp-transport": "^2.0.1",
+    "request-ip": "^1.1.4"
+  }
+}

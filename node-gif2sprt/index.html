@@ -1,0 +1,108 @@
+<html>
+    <title>Gif 2 Sprite</title>
+    <style type="text/css">
+    	html, body {
+    		width: 100%;
+    		height: 100%;
+    		background-color: #CCDFE6;
+    		overflow: hidden;
+    	}
+
+    	.container {
+    		width: 80%;
+    		border: 0px solid grey;
+    		margin: 0 auto; 
+    		overflow: hidden;
+    		-webkit-box-shadow: 0px 0px 20px 14px rgba(112,212,219,1);
+			-moz-box-shadow: 0px 0px 20px 14px rgba(112,212,219,1);
+			box-shadow: 0px 0px 40px 40px rgba(112,212,219,1);
+			border-radius: 8px;
+    	}
+
+    	.logo {
+            text-align: center;
+    	}
+
+        .control{
+            background-color: #7FB2BA;
+            text-align: center;
+            vertical-align: middle;
+        }
+
+    	.sec-container {
+    		background-color: #7FB2BA;
+    		overflow-x: hidden;
+    		overflow-y: auto;
+    		position: relative;
+    	}
+
+    	.section {
+    		float: left;
+    		width: 48%;
+    		height: 65%;
+    		background-color: #CCE0E6;
+    		margin: 1%;
+            text-align: center;
+            vertical-align: middle;
+    	}
+    </style>
+    <script type="text/javascript" src="js/jquery-1.11.3.min.js"></script>
+    <script type="text/javascript" src="upload/jquery.ui.widget.js"></script>
+    <script type="text/javascript" src="upload/jquery.fileupload.js"></script>
+    <script type="text/javascript" src="js/socket.io-1.0.0.js"></script>
+    <script type="text/javascript" src="js/a7-com.js"></script>
+    <body>
+    <br><br><br>
+    	<div class="container">
+    		<div class="logo">
+                <h2>Gif 2 Sprite Converter</h2>
+                <div style="float:right;">powered by: <a href="http://www.imagemagick.org/">Image Magick</a> </div>
+            </div>
+            <div class="control"> <br>
+                <input type="file" class="rc-upld" name="files[]" data-url="/uploadimg" style="width:80px;" /><input style="width:200px;visibility:hidden;" /><button id="cvtr">convert</button>
+            </div>
+    		<div class="sec-container">
+    			<div class="section">
+    				Src Image
+                    
+                    <br>
+                    <img id="srcImg" style="position: relative;max-width:100%;max-height:100%;">
+    			</div>
+    			<div class="section">
+    				Converted  Image <br>
+                    <a id="destWrap">
+                        <img id="destImg" style="position: relative;background-image: url('css/img/chkr_sm_gr.png');background-color:rgb(255,255,255);max-width:100%;max-height:100%;">
+                    </a>
+    			</div>
+    		</div>
+    	</div>
+    </body>
+    <script type="text/javascript">
+    var sockid, filename;
+    $(function(){
+            $(".rc-upld").fileupload({ 
+                dataType: 'json', 
+                autoUpload: true, 
+                add: function(dd, edata){
+                    edata.formData = {
+                         socketid: sockid
+                    }
+                    edata.submit();
+                },
+                done: function(dd, edata){
+                    console.log(edata.result.files);
+                    $("#srcImg").attr("src", "src/img/" + edata.result.files[0].name)
+                    filename = edata.result.files[0].name;
+                } 
+            });
+            $("#cvtr").on("click", function(){
+                if (!filename){
+                    return;
+                }
+                $.getJSON( "/cvrtproc/" + filename , function( json ) {
+                    console.log(json);
+                 });
+            });
+    });
+    </script>
+</html>
